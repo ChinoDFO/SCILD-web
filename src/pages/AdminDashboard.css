@@ -1,0 +1,46 @@
+.panel-admin {
+  font-family: system-ui, sans-serif;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.panel-admin-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.sesion-actual {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.filtros-estado {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.filtros-estado button {
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 999px;
+  background: white;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.filtros-estado .filtro-activo {
+  background: #1a73e8;
+  color: white;
+  border-color: #1a73e8;
+}
+
+.lista-pedidos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}

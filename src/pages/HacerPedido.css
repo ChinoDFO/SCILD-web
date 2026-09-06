@@ -1,0 +1,12 @@
+.pagina-pedido { max-width: 480px; margin: 0 auto; font-family: system-ui, sans-serif; padding: 0 1rem; }
+.formulario-pedido { display: flex; flex-direction: column; gap: 1rem; }
+.formulario-pedido fieldset { border: 1px solid #ddd; border-radius: 8px; padding: 0.75rem 1rem; }
+.opcion-version { display: flex; align-items: center; gap: 0.5rem; padding: 0.4rem 0; }
+.opcion-version.agotado { color: #999; }
+.formulario-pedido label { display: flex; flex-direction: column; gap: 0.3rem; font-weight: 600; font-size: 0.9rem; }
+.formulario-pedido input[type="text"], .formulario-pedido input[type="email"],
+.formulario-pedido input[type="tel"], .formulario-pedido textarea {
+  font-weight: normal; font-size: 1rem; padding: 0.5rem; border: 1px solid #ccc; border-radius: 6px; font-family: inherit;
+}
+.formulario-pedido button { padding: 0.7rem; border: none; border-radius: 6px; background: #1a73e8; color: white; font-weight: 600; cursor: pointer; }
+.formulario-pedido button:disabled { opacity: 0.6; cursor: default; }
