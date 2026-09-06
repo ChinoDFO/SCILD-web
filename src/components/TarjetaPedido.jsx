@@ -5,6 +5,7 @@ import {
   formatearFecha,
   valorPorDefectoDatetimeLocal,
 } from "../utils/fechas";
+import { enviarCorreoPedidoConfirmado } from "../services/notificaciones";
 import "./TarjetaPedido.css";
 
 const ETIQUETAS_ESTADO = {
@@ -33,7 +34,17 @@ export default function TarjetaPedido({
   async function manejarConfirmar() {
     setProcesando(true);
     try {
-      await alConfirmar(pedido.id, new Date(fechaLimite));
+      const fecha = new Date(fechaLimite);
+      await alConfirmar(pedido.id, fecha);
+      enviarCorreoPedidoConfirmado({
+        correo: pedido.correo,
+        nombre: pedido.nombre,
+        numeroPedido: pedido.numeroPedido,
+        versionNombre: pedido.versionNombre,
+        cancelableHasta: fecha,
+      }).catch((err) =>
+        console.error("No se pudo avisar al cliente por correo:", err)
+      );
     } finally {
       setProcesando(false);
     }
@@ -139,22 +150,14 @@ export default function TarjetaPedido({
                 onChange={(e) => setFechaLimite(e.target.value)}
               />
             </label>
-            <button
-              type="button"
-              disabled={procesando}
-              onClick={manejarConfirmar}
-            >
+            <button type="button" disabled={procesando} onClick={manejarConfirmar}>
               Confirmar pedido
             </button>
           </div>
         )}
 
         {pedido.estado === "confirmado" && (
-          <button
-            type="button"
-            disabled={procesando}
-            onClick={manejarEntregado}
-          >
+          <button type="button" disabled={procesando} onClick={manejarEntregado}>
             Marcar como entregado
           </button>
         )}

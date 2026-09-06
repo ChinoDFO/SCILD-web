@@ -1,6 +1,9 @@
+// src/pages/CancelarPedido.jsx
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { cancelarPedido } from "../services/pedidos";
+import { enviarCorreoPedidoCancelado } from "../services/notificaciones";
 import "./CancelarPedido.css";
 
 const DATOS_INICIALES = { nombre: "", correo: "", codigo: "" };
@@ -10,6 +13,7 @@ export default function CancelarPedido() {
   const [enviando, setEnviando] = useState(false);
   const [error, setError] = useState("");
   const [cancelado, setCancelado] = useState(false);
+  const [numeroPedido, setNumeroPedido] = useState(null);
 
   function actualizarCampo(campo, valor) {
     setDatos((anterior) => ({ ...anterior, [campo]: valor }));
@@ -20,9 +24,16 @@ export default function CancelarPedido() {
     setError("");
     setEnviando(true);
     try {
-      await cancelarPedido(datos);
+      const resultado = await cancelarPedido(datos);
+      enviarCorreoPedidoCancelado({
+        correo: datos.correo,
+        nombre: datos.nombre,
+        numeroPedido: resultado.numeroPedido,
+      }).catch((err) =>
+        console.error("No se pudo enviar el correo de cancelación:", err)
+      );
+      setNumeroPedido(resultado.numeroPedido);
       setCancelado(true);
-      // Nota: el correo confirmando la cancelación se agrega en el paso 6.
     } catch (err) {
       console.error(err);
       setError(err.message || "No se pudo cancelar el pedido.");
@@ -36,7 +47,12 @@ export default function CancelarPedido() {
       <main className="pagina-cancelar">
         <div className="aviso aviso-ok">
           <h1>Tu pedido fue cancelado</h1>
-          <p>El stock de esa versión ya se repuso.</p>
+          <p>
+            El pedido #{numeroPedido} quedó cancelado y el stock de esa
+            versión ya se repuso. Te llegará un correo confirmándolo. Revis
+            tu bandeja de entrada (y la carpeta de spam) para asegurarte de
+            que lo recibiste.
+          </p>
         </div>
         <p><Link to="/">Volver al inicio</Link></p>
       </main>
@@ -54,17 +70,32 @@ export default function CancelarPedido() {
       <form className="formulario-cancelar" onSubmit={manejarEnvio}>
         <label>
           Nombre completo (igual que en el pedido)
-          <input type="text" value={datos.nombre} onChange={(e) => actualizarCampo("nombre", e.target.value)} required />
+          <input
+            type="text"
+            value={datos.nombre}
+            onChange={(e) => actualizarCampo("nombre", e.target.value)}
+            required
+          />
         </label>
 
         <label>
           Correo (igual que en el pedido)
-          <input type="email" value={datos.correo} onChange={(e) => actualizarCampo("correo", e.target.value)} required />
+          <input
+            type="email"
+            value={datos.correo}
+            onChange={(e) => actualizarCampo("correo", e.target.value)}
+            required
+          />
         </label>
 
         <label>
           Código de cancelación
-          <input type="text" value={datos.codigo} onChange={(e) => actualizarCampo("codigo", e.target.value)} required />
+          <input
+            type="text"
+            value={datos.codigo}
+            onChange={(e) => actualizarCampo("codigo", e.target.value)}
+            required
+          />
         </label>
 
         {error && <p className="mensaje-error">{error}</p>}
@@ -74,7 +105,9 @@ export default function CancelarPedido() {
         </button>
       </form>
 
-      <p className="enlace-volver"><Link to="/">Volver al inicio</Link></p>
+      <p className="enlace-volver">
+        <Link to="/">Volver al inicio</Link>
+      </p>
     </main>
   );
 }

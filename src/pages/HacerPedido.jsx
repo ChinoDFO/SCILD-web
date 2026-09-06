@@ -1,12 +1,20 @@
+// src/pages/HacerPedido.jsx
+
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { listarProductos } from "../services/productos";
 import { crearPedido } from "../services/pedidos";
+import { enviarCorreoNuevoPedidoAdmin } from "../services/notificaciones";
 import ResumenPedido from "../components/ResumenPedido";
 import "./HacerPedido.css";
 
 const DATOS_INICIALES = {
-  nombre: "", correo: "", telefono: "", domicilio: "", indicaciones: "", versionId: "",
+  nombre: "",
+  correo: "",
+  telefono: "",
+  domicilio: "",
+  indicaciones: "",
+  versionId: "",
 };
 
 export default function HacerPedido() {
@@ -17,7 +25,9 @@ export default function HacerPedido() {
   const [error, setError] = useState("");
   const [pedidoCreado, setPedidoCreado] = useState(null);
 
-  useEffect(() => { cargarProductos(); }, []);
+  useEffect(() => {
+    cargarProductos();
+  }, []);
 
   function cargarProductos() {
     setCargandoProductos(true);
@@ -46,6 +56,9 @@ export default function HacerPedido() {
     setEnviando(true);
     try {
       const pedido = await crearPedido(datos);
+      enviarCorreoNuevoPedidoAdmin(pedido).catch((err) =>
+        console.error("No se pudo avisar al administrador por correo:", err)
+      );
       setPedidoCreado(pedido);
     } catch (err) {
       console.error(err);
@@ -54,7 +67,7 @@ export default function HacerPedido() {
           ? "Justo se acabó el stock de esa versión. Elige otra, por favor."
           : "No se pudo registrar el pedido. Inténtalo de nuevo."
       );
-      cargarProductos();
+      cargarProductos(); // por si el stock cambió mientras tanto
     } finally {
       setEnviando(false);
     }
@@ -78,18 +91,26 @@ export default function HacerPedido() {
             productos.map((producto) => {
               const agotado = (producto.stockDisponible ?? 0) <= 0;
               return (
-                <label key={producto.id} className={`opcion-version ${agotado ? "agotado" : ""}`}>
+                <label
+                  key={producto.id}
+                  className={`opcion-version ${agotado ? "agotado" : ""}`}
+                >
                   <input
                     type="radio"
                     name="versionId"
                     value={producto.id}
                     disabled={agotado}
                     checked={datos.versionId === producto.id}
-                    onChange={(e) => actualizarCampo("versionId", e.target.value)}
+                    onChange={(e) =>
+                      actualizarCampo("versionId", e.target.value)
+                    }
                     required
                   />
                   <span>
-                    {producto.nombre} {agotado ? "— agotado" : `— ${producto.stockDisponible} disponibles`}
+                    {producto.nombre}{" "}
+                    {agotado
+                      ? "— agotado"
+                      : `— ${producto.stockDisponible} disponibles`}
                   </span>
                 </label>
               );
@@ -98,27 +119,51 @@ export default function HacerPedido() {
 
         <label>
           Nombre completo
-          <input type="text" value={datos.nombre} onChange={(e) => actualizarCampo("nombre", e.target.value)} required />
+          <input
+            type="text"
+            value={datos.nombre}
+            onChange={(e) => actualizarCampo("nombre", e.target.value)}
+            required
+          />
         </label>
 
         <label>
           Correo
-          <input type="email" value={datos.correo} onChange={(e) => actualizarCampo("correo", e.target.value)} required />
+          <input
+            type="email"
+            value={datos.correo}
+            onChange={(e) => actualizarCampo("correo", e.target.value)}
+            required
+          />
         </label>
 
         <label>
           Teléfono
-          <input type="tel" value={datos.telefono} onChange={(e) => actualizarCampo("telefono", e.target.value)} required />
+          <input
+            type="tel"
+            value={datos.telefono}
+            onChange={(e) => actualizarCampo("telefono", e.target.value)}
+            required
+          />
         </label>
 
         <label>
           Domicilio
-          <input type="text" value={datos.domicilio} onChange={(e) => actualizarCampo("domicilio", e.target.value)} required />
+          <input
+            type="text"
+            value={datos.domicilio}
+            onChange={(e) => actualizarCampo("domicilio", e.target.value)}
+            required
+          />
         </label>
 
         <label>
           Indicaciones para el repartidor (opcional)
-          <textarea value={datos.indicaciones} onChange={(e) => actualizarCampo("indicaciones", e.target.value)} rows={3} />
+          <textarea
+            value={datos.indicaciones}
+            onChange={(e) => actualizarCampo("indicaciones", e.target.value)}
+            rows={3}
+          />
         </label>
 
         {error && <p className="mensaje-error">{error}</p>}
