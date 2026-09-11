@@ -45,6 +45,8 @@
   padding: 10px 12px;
   border: 1px solid var(--line);
   border-radius: var(--r-sm);
+  background: var(--paper);
+  color: var(--ink);
   font-size: 15px;
   transition: border-color 0.15s ease;
 }
@@ -62,11 +64,11 @@
   color: #fff;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease;
 }
 
 .tarjeta-login button:hover:not(:disabled) {
   background: var(--violet-strong);
+  box-shadow: 0 8px 20px -8px rgba(139, 92, 246, 0.6);
 }
 
 .tarjeta-login button:disabled {
@@ -78,4 +80,5 @@
   margin-top: 4px;
   color: var(--red);
   font-size: 13.5px;
+  animation: aparecer 0.35s ease both;
 }

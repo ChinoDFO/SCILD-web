@@ -63,7 +63,7 @@ export default function AdminDashboard() {
   }, {});
 
   return (
-    <main className="panel-admin">
+    <main className="panel-admin entrada">
       <header className="panel-admin-cabecera">
         <div>
           <h1>Pedidos — SCILD</h1>

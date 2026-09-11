@@ -89,7 +89,7 @@ export default function HacerPedido({ mostrarBarra = true }) {
         </header>
       )}
 
-      <main className="contenido-pedido">
+      <main className="contenido-pedido entrada">
         <div className="intro-pedido">
           <h1>Pide tu botón SCILD</h1>
           <p className="subtitulo">

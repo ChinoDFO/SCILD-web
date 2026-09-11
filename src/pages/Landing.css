@@ -37,10 +37,11 @@
 
 .landing-nav-links a {
   color: var(--ink-soft);
+  transition: color 0.15s ease;
 }
 
 .landing-nav-links a:hover {
-  color: var(--violet);
+  color: var(--violet-strong);
 }
 
 /* ---------- HERO / PARALLAX ---------- */
@@ -79,6 +80,17 @@
     rgba(139, 92, 246, 0) 70%
   );
   mix-blend-mode: screen;
+  animation: landing-brillo-pulso 9s ease-in-out infinite;
+}
+
+@keyframes landing-brillo-pulso {
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 
 .landing-hero-contenido {
@@ -103,6 +115,7 @@
   justify-content: center;
   color: rgba(255, 255, 255, 0.4);
   font-size: 12px;
+  animation: aparecer 0.7s ease-out both, landing-logo-flotar 5s ease-in-out 0.7s infinite;
 }
 
 .landing-hero-logo::after {
@@ -115,12 +128,24 @@
   line-height: 1.08;
   color: #fff;
   letter-spacing: -0.5px;
+  animation: aparecer 0.7s ease-out 0.1s both;
 }
 
 .landing-hero-eslogan {
   color: rgba(255, 255, 255, 0.72);
   font-size: 18px;
   max-width: 480px;
+  animation: aparecer 0.7s ease-out 0.2s both;
+}
+
+@keyframes landing-logo-flotar {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 .landing-hero-cta {
@@ -135,6 +160,7 @@
   cursor: pointer;
   box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.5);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  animation: aparecer 0.7s ease-out 0.3s both;
 }
 
 .landing-hero-cta:hover {
@@ -244,6 +270,12 @@
   justify-content: center;
   color: var(--ink-soft);
   font-size: 14px;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.landing-bloque-media:hover {
+  border-color: var(--violet-strong);
+  transform: scale(1.015);
 }
 
 /* ---------- TARJETAS ---------- */
@@ -286,6 +318,11 @@
   border-radius: var(--r-md);
   background: var(--violet-tint);
   margin-bottom: var(--sp-4);
+  transition: transform 0.3s ease;
+}
+
+.landing-tarjeta:hover .landing-tarjeta-icono {
+  transform: scale(1.1) rotate(-4deg);
 }
 
 .landing-tarjeta h3 {

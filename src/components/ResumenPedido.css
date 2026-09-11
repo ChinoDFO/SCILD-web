@@ -56,6 +56,12 @@
   border-radius: var(--r-md);
   padding: var(--sp-4);
   background: var(--surface);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.campo-codigo:hover {
+  border-color: var(--violet-strong);
+  transform: translateY(-2px);
 }
 
 .campo-codigo-etiqueta {

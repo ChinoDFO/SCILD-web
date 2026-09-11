@@ -51,7 +51,7 @@ export default function Landing() {
       document.body.style.overflow = "";
     };
   }, [pedidoAbierto]);
-
+ 
   useEffect(() => {
     if (!pedidoAbierto) return;
     function alTecla(evento) {
@@ -76,6 +76,7 @@ export default function Landing() {
           <Link to="/cancelar">Cancelar pedido</Link>
           <Link to="/admin/login">Administrador</Link>
         </nav>
+        
       </header>
 
       {/* ---------- HERO CON PARALLAX ---------- */}

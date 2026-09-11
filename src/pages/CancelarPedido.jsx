@@ -52,7 +52,7 @@ export default function CancelarPedido() {
       </header>
 
       {cancelado ? (
-        <main className="pagina-cancelar">
+        <main className="pagina-cancelar entrada">
           <div className="aviso aviso-ok">
             <h1>Tu pedido fue cancelado</h1>
             <p>
@@ -65,7 +65,7 @@ export default function CancelarPedido() {
           <p><Link to="/">Volver al inicio</Link></p>
         </main>
       ) : (
-        <main className="pagina-cancelar">
+        <main className="pagina-cancelar entrada">
           <h1>Cancelar un pedido</h1>
           <p className="instrucciones">
             Escribe el nombre y correo con los que hiciste el pedido, junto

@@ -125,6 +125,7 @@ p {
 a {
   color: var(--violet);
   text-decoration: none;
+  transition: color 0.15s ease;
 }
 
 a:hover {
@@ -138,6 +139,28 @@ select {
   font-family: var(--body);
 }
 
+button {
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
+    opacity 0.15s ease;
+}
+
+button:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+input,
+textarea,
+select {
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  box-shadow: 0 0 0 4px var(--violet-tint);
+}
+
 :focus-visible {
   outline: 2px solid var(--violet);
   outline-offset: 2px;
@@ -147,6 +170,22 @@ code {
   font-family: ui-monospace, Menlo, Consolas, monospace;
 }
 
+/* Entrada suave: se usa en el contenedor principal de cada página */
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.entrada {
+  animation: aparecer 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 @media (max-width: 640px) {
   h1 {
     font-size: 30px;
@@ -154,7 +193,12 @@ code {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }

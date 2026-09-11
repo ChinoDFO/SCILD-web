@@ -25,7 +25,7 @@ function CampoCodigo({ etiqueta, valor, explicacion }) {
 
 export default function ResumenPedido({ pedido }) {
   return (
-    <div className="resumen-pedido">
+    <div className="resumen-pedido entrada">
       <h2>¡Tu pedido fue registrado!</h2>
       <p className="resumen-pedido-numero">Pedido #{pedido.numeroPedido}</p>
 

@@ -54,7 +54,13 @@
   border: 1px solid var(--line);
   border-radius: var(--r-md);
   cursor: pointer;
-  transition: border-color 0.15s ease, background 0.15s ease;
+  transition: border-color 0.15s ease, background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.opcion-version:not(.agotado):hover {
+  border-color: var(--violet-strong);
+  transform: translateY(-1px);
 }
 
 .opcion-version:has(input:checked) {
@@ -116,6 +122,7 @@
   background: var(--red-tint);
   border-radius: var(--r-sm);
   padding: var(--sp-3);
+  animation: aparecer 0.35s ease both;
 }
 
 .formulario-pedido button {
@@ -127,11 +134,11 @@
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease;
 }
 
 .formulario-pedido button:hover:not(:disabled) {
   background: var(--violet-strong);
+  box-shadow: 0 8px 20px -8px rgba(139, 92, 246, 0.6);
 }
 
 .formulario-pedido button:disabled {

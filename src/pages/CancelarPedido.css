@@ -44,6 +44,8 @@
   padding: 11px var(--sp-3);
   border: 1px solid var(--line);
   border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--ink);
   transition: border-color 0.15s ease;
 }
 
@@ -60,16 +62,25 @@
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
-  transition: background 0.15s ease;
 }
 
 .formulario-cancelar button:hover:not(:disabled) {
-  background: #7e1a15;
+  background: #c94840;
+  box-shadow: 0 8px 20px -8px rgba(229, 83, 75, 0.55);
 }
 
 .formulario-cancelar button:disabled {
   opacity: 0.55;
   cursor: default;
+}
+
+.mensaje-error {
+  font-size: 14px;
+  color: var(--red);
+  background: var(--red-tint);
+  border-radius: var(--r-sm);
+  padding: var(--sp-3);
+  animation: aparecer 0.35s ease both;
 }
 
 .aviso {
