@@ -17,7 +17,7 @@ const DATOS_INICIALES = {
   versionId: "",
 };
 
-export default function HacerPedido() {
+export default function HacerPedido({ mostrarBarra = true }) {
   const [productos, setProductos] = useState([]);
   const [cargandoProductos, setCargandoProductos] = useState(true);
   const [datos, setDatos] = useState(DATOS_INICIALES);
@@ -79,13 +79,15 @@ export default function HacerPedido() {
 
   return (
     <div className="pagina-pedido">
-      <header className="barra-superior">
-        <span className="marca">SCILD</span>
-        <nav className="barra-superior-nav">
-          <Link to="/cancelar">Cancelar pedido</Link>
-          <Link to="/admin/login">Administrador</Link>
-        </nav>
-      </header>
+      {mostrarBarra && (
+        <header className="barra-superior">
+          <span className="marca">SCILD</span>
+          <nav className="barra-superior-nav">
+            <Link to="/cancelar">Cancelar pedido</Link>
+            <Link to="/admin/login">Administrador</Link>
+          </nav>
+        </header>
+      )}
 
       <main className="contenido-pedido">
         <div className="intro-pedido">

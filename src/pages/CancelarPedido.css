@@ -1,4 +1,12 @@
+.pagina-cancelar-wrap {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
 .pagina-cancelar {
+  flex: 1;
+  width: 100%;
   max-width: 460px;
   margin: 0 auto;
   padding: var(--sp-7) var(--sp-5) var(--sp-8);
@@ -76,8 +84,8 @@
 
 .aviso-ok {
   background: var(--green-tint);
-  border: 1px solid #a8d9bc;
-  color: #124a30;
+  border: 1px solid #2f6b46;
+  color: #bfe9cf;
 }
 
 .enlace-volver {

@@ -1,22 +1,22 @@
 :root {
-  /* Color: paleta basada en el morado de marca de SCILD */
-  --ink: #18121f;
-  --ink-soft: #5c5468;
-  --paper: #fbfaf8;
-  --surface: #ffffff;
-  --line: #e6e1ea;
+  /* Color: paleta oscura basada en el morado de marca de SCILD */
+  --ink: #f1edf7;
+  --ink-soft: #b3a9c4;
+  --paper: #120d1a;
+  --surface: #1c1526;
+  --line: #322a41;
 
-  --violet: #5b1fb8;
-  --violet-strong: #4a1897;
-  --violet-tint: #f2ecfb;
+  --violet: #8b5cf6;
+  --violet-strong: #a78bfa;
+  --violet-tint: #241c38;
 
-  --sky: #1c73b0;
-  --amber: #b1660a;
-  --amber-tint: #fbf1e2;
-  --green: #1c7a4e;
-  --green-tint: #e9f6ef;
-  --red: #a4261f;
-  --red-tint: #fbebe9;
+  --sky: #4a9fdb;
+  --amber: #d99a35;
+  --amber-tint: #3a2a12;
+  --green: #3cb877;
+  --green-tint: #14301f;
+  --red: #e5534b;
+  --red-tint: #3a1613;
 
   /* Tipografía: Fraunces para títulos, Inter para todo lo funcional */
   --display: "Fraunces", "Iowan Old Style", Georgia, serif;
@@ -37,9 +37,38 @@
   --r-lg: 18px;
 
   --shadow-card:
-    0 1px 2px rgba(24, 18, 31, 0.04), 0 8px 24px -12px rgba(24, 18, 31, 0.18);
+    0 1px 2px rgba(0, 0, 0, 0.2), 0 8px 24px -12px rgba(0, 0, 0, 0.55);
 
-  color-scheme: light;
+  color-scheme: dark;
+}
+
+.barra-superior {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-4) var(--sp-5);
+  border-bottom: 1px solid var(--line);
+}
+
+.marca {
+  font-family: var(--display);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.barra-superior-nav {
+  display: flex;
+  gap: var(--sp-5);
+  font-size: 14px;
+}
+
+.barra-superior-nav a {
+  color: var(--ink-soft);
+}
+
+.barra-superior-nav a:hover {
+  color: var(--violet);
 }
 
 *,

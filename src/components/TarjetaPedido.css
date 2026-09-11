@@ -40,8 +40,8 @@
   font-weight: 600;
   padding: 3px 10px;
   border-radius: 999px;
-  color: #fff;
-  background: var(--ink-soft);
+  color: var(--ink);
+  background: var(--line);
   white-space: nowrap;
 }
 

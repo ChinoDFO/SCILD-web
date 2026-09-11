@@ -1,8 +1,9 @@
 // src/pages/AdminLogin.jsx
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { iniciarSesionAdmin } from "../services/auth";
+import { useAuth } from "../context/AuthContext";
 import "./AdminLogin.css";
 
 export default function AdminLogin() {
@@ -11,6 +12,13 @@ export default function AdminLogin() {
   const [error, setError] = useState("");
   const [enviando, setEnviando] = useState(false);
   const navegar = useNavigate();
+  const { usuario, cargando } = useAuth();
+
+  useEffect(() => {
+    if (!cargando && usuario) {
+      navegar("/admin", { replace: true });
+    }
+  }, [cargando, usuario, navegar]);
 
   async function manejarEnvio(evento) {
     evento.preventDefault();

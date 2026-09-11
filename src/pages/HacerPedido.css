@@ -4,35 +4,6 @@
   flex-direction: column;
 }
 
-.barra-superior {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--sp-4) var(--sp-5);
-  border-bottom: 1px solid var(--line);
-}
-
-.marca {
-  font-family: var(--display);
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--ink);
-}
-
-.barra-superior-nav {
-  display: flex;
-  gap: var(--sp-5);
-  font-size: 14px;
-}
-
-.barra-superior-nav a {
-  color: var(--ink-soft);
-}
-
-.barra-superior-nav a:hover {
-  color: var(--violet);
-}
-
 .contenido-pedido {
   flex: 1;
   width: 100%;

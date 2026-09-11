@@ -13,7 +13,17 @@ export default function RutaProtegida({ children }) {
   const { usuario, cargando } = useAuth();
 
   if (cargando) {
-    return <p style={{ padding: "2rem" }}>Verificando sesión...</p>;
+    return (
+      <p
+        style={{
+          padding: "2rem",
+          color: "var(--ink-soft)",
+          fontFamily: "var(--body)",
+        }}
+      >
+        Verificando sesión...
+      </p>
+    );
   }
 
   if (!usuario) {
