@@ -1,69 +1,77 @@
 .tarjeta-pedido {
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 1rem;
-  background: white;
-  border-left: 5px solid #999;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  padding: var(--sp-4);
+  background: var(--surface);
+  border-left: 3px solid var(--line);
 }
 
 .tarjeta-pedido.estado-pendiente {
-  border-left-color: #f9ab00;
+  border-left-color: var(--amber);
 }
+
 .tarjeta-pedido.estado-confirmado {
-  border-left-color: #1a73e8;
+  border-left-color: var(--sky);
 }
+
 .tarjeta-pedido.estado-entregado {
-  border-left-color: #34a853;
+  border-left-color: var(--green);
 }
+
 .tarjeta-pedido.estado-cancelado {
-  border-left-color: #d93025;
-  opacity: 0.85;
+  border-left-color: var(--red);
+  opacity: 0.8;
 }
 
 .tarjeta-pedido-cabecera {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.5rem;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-3);
 }
 
 .tarjeta-pedido-cabecera h3 {
-  margin: 0;
-  font-size: 1rem;
+  font-size: 15px;
 }
 
 .etiqueta-estado {
-  font-size: 0.75rem;
+  font-size: 12px;
   font-weight: 600;
-  padding: 0.15rem 0.6rem;
+  padding: 3px 10px;
   border-radius: 999px;
-  color: white;
-  background: #999;
+  color: #fff;
+  background: var(--ink-soft);
+  white-space: nowrap;
 }
+
 .etiqueta-estado.estado-pendiente {
-  background: #f9ab00;
+  background: var(--amber);
 }
+
 .etiqueta-estado.estado-confirmado {
-  background: #1a73e8;
+  background: var(--sky);
 }
+
 .etiqueta-estado.estado-entregado {
-  background: #34a853;
+  background: var(--green);
 }
+
 .etiqueta-estado.estado-cancelado {
-  background: #d93025;
+  background: var(--red);
 }
 
 .tarjeta-pedido-datos {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 0.15rem 0.6rem;
-  font-size: 0.85rem;
-  margin: 0 0 1rem 0;
+  gap: 3px var(--sp-3);
+  font-size: 13.5px;
+  margin: 0 0 var(--sp-4);
 }
 
 .tarjeta-pedido-datos dt {
-  color: #666;
-  font-weight: 600;
+  color: var(--ink-soft);
+  font-weight: 500;
 }
 
 .tarjeta-pedido-datos dd {
@@ -73,39 +81,57 @@
 .tarjeta-pedido-acciones {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: var(--sp-2);
 }
 
 .accion-confirmar {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: var(--sp-2);
 }
 
 .accion-confirmar label {
-  font-size: 0.8rem;
+  font-size: 13px;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 4px;
+  color: var(--ink-soft);
+}
+
+.accion-confirmar input {
+  padding: 6px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+  font: inherit;
 }
 
 .tarjeta-pedido-acciones button {
-  padding: 0.5rem;
+  padding: 9px;
   border: none;
-  border-radius: 6px;
-  background: #1a73e8;
-  color: white;
+  border-radius: var(--r-sm);
+  background: var(--violet);
+  color: #fff;
   font-weight: 600;
+  font-size: 14px;
   cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.tarjeta-pedido-acciones button:hover:not(:disabled) {
+  background: var(--violet-strong);
 }
 
 .tarjeta-pedido-acciones button.boton-peligro {
   background: transparent;
-  color: #d93025;
-  border: 1px solid #d93025;
+  color: var(--red);
+  border: 1px solid var(--red);
+}
+
+.tarjeta-pedido-acciones button.boton-peligro:hover:not(:disabled) {
+  background: var(--red-tint);
 }
 
 .tarjeta-pedido-acciones button:disabled {
-  opacity: 0.6;
+  opacity: 0.55;
   cursor: default;
 }

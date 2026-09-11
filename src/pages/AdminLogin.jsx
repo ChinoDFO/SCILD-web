@@ -30,7 +30,8 @@ export default function AdminLogin() {
   return (
     <main className="pagina-login">
       <form className="tarjeta-login" onSubmit={manejarEnvio}>
-        <h1>Panel de administrador — SCILD</h1>
+        <p className="marca-login">SCILD</p>
+        <h1>Panel de administrador</h1>
 
         <label htmlFor="correo">Correo</label>
         <input

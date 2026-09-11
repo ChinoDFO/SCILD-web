@@ -78,106 +78,118 @@ export default function HacerPedido() {
   }
 
   return (
-    <main className="pagina-pedido">
-      <h1>Pide tu botón SCILD</h1>
+    <div className="pagina-pedido">
+      <header className="barra-superior">
+        <span className="marca">SCILD</span>
+        <nav className="barra-superior-nav">
+          <Link to="/cancelar">Cancelar pedido</Link>
+          <Link to="/admin/login">Administrador</Link>
+        </nav>
+      </header>
 
-      <form className="formulario-pedido" onSubmit={manejarEnvio}>
-        <fieldset>
-          <legend>Elige la versión</legend>
+      <main className="contenido-pedido">
+        <div className="intro-pedido">
+          <h1>Pide tu botón SCILD</h1>
+          <p className="subtitulo">
+            Un botón, una alerta a todo tu equipo al instante.
+          </p>
+        </div>
 
-          {cargandoProductos && <p>Cargando versiones disponibles...</p>}
+        <form className="formulario-pedido" onSubmit={manejarEnvio}>
+          <fieldset>
+            <legend>Elige la versión</legend>
 
-          {!cargandoProductos &&
-            productos.map((producto) => {
-              const agotado = (producto.stockDisponible ?? 0) <= 0;
-              return (
-                <label
-                  key={producto.id}
-                  className={`opcion-version ${agotado ? "agotado" : ""}`}
-                >
-                  <input
-                    type="radio"
-                    name="versionId"
-                    value={producto.id}
-                    disabled={agotado}
-                    checked={datos.versionId === producto.id}
-                    onChange={(e) =>
-                      actualizarCampo("versionId", e.target.value)
-                    }
-                    required
-                  />
-                  <span>
-                    {producto.nombre}{" "}
-                    {agotado
-                      ? "— agotado"
-                      : `— ${producto.stockDisponible} disponibles`}
-                  </span>
-                </label>
-              );
-            })}
-        </fieldset>
+            {cargandoProductos && <p>Cargando versiones disponibles...</p>}
 
-        <label>
-          Nombre completo
-          <input
-            type="text"
-            value={datos.nombre}
-            onChange={(e) => actualizarCampo("nombre", e.target.value)}
-            required
-          />
-        </label>
+            {!cargandoProductos && (
+              <div className="opciones-version">
+                {productos.map((producto) => {
+                  const agotado = (producto.stockDisponible ?? 0) <= 0;
+                  return (
+                    <label
+                      key={producto.id}
+                      className={`opcion-version ${agotado ? "agotado" : ""}`}
+                    >
+                      <input
+                        type="radio"
+                        name="versionId"
+                        value={producto.id}
+                        disabled={agotado}
+                        checked={datos.versionId === producto.id}
+                        onChange={(e) =>
+                          actualizarCampo("versionId", e.target.value)
+                        }
+                        required
+                      />
+                      <span>
+                        {producto.nombre}{" "}
+                        {agotado
+                          ? "— agotado"
+                          : `— ${producto.stockDisponible} disponibles`}
+                      </span>
+                    </label>
+                  );
+                })}
+              </div>
+            )}
+          </fieldset>
 
-        <label>
-          Correo
-          <input
-            type="email"
-            value={datos.correo}
-            onChange={(e) => actualizarCampo("correo", e.target.value)}
-            required
-          />
-        </label>
+          <label>
+            Nombre completo
+            <input
+              type="text"
+              value={datos.nombre}
+              onChange={(e) => actualizarCampo("nombre", e.target.value)}
+              required
+            />
+          </label>
 
-        <label>
-          Teléfono
-          <input
-            type="tel"
-            value={datos.telefono}
-            onChange={(e) => actualizarCampo("telefono", e.target.value)}
-            required
-          />
-        </label>
+          <label>
+            Correo
+            <input
+              type="email"
+              value={datos.correo}
+              onChange={(e) => actualizarCampo("correo", e.target.value)}
+              required
+            />
+          </label>
 
-        <label>
-          Domicilio
-          <input
-            type="text"
-            value={datos.domicilio}
-            onChange={(e) => actualizarCampo("domicilio", e.target.value)}
-            required
-          />
-        </label>
+          <label>
+            Teléfono
+            <input
+              type="tel"
+              value={datos.telefono}
+              onChange={(e) => actualizarCampo("telefono", e.target.value)}
+              required
+            />
+          </label>
 
-        <label>
-          Indicaciones para el repartidor (opcional)
-          <textarea
-            value={datos.indicaciones}
-            onChange={(e) => actualizarCampo("indicaciones", e.target.value)}
-            rows={3}
-          />
-        </label>
+          <label>
+            Domicilio
+            <input
+              type="text"
+              value={datos.domicilio}
+              onChange={(e) => actualizarCampo("domicilio", e.target.value)}
+              required
+            />
+          </label>
 
-        {error && <p className="mensaje-error">{error}</p>}
+          <label>
+            Indicaciones para el repartidor (opcional)
+            <textarea
+              value={datos.indicaciones}
+              onChange={(e) => actualizarCampo("indicaciones", e.target.value)}
+              rows={3}
+            />
+          </label>
 
-        <button type="submit" disabled={enviando}>
-          {enviando ? "Enviando..." : "Hacer pedido"}
-        </button>
-      </form>
+          {error && <p className="mensaje-error">{error}</p>}
 
-      <p className="enlace-admin">
-        <Link to="/cancelar">¿Necesitas cancelar un pedido?</Link>
-        {" · "}
-        <Link to="/admin/login">Entrar como administrador</Link>
-      </p>
-    </main>
+          <button type="submit" disabled={enviando}>
+            {enviando ? "Enviando..." : "Hacer pedido"}
+          </button>
+        </form>
+      </main>
+    </div>
   );
 }
