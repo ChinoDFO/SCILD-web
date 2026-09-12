@@ -77,6 +77,13 @@ export default function HacerPedido({ mostrarBarra = true }) {
     return <ResumenPedido pedido={pedidoCreado} />;
   }
 
+  // TEMPORAL (solo estético): por ahora únicamente ofrecemos la versión más
+  // sencilla del botón. No se borra nada del catálogo ni de la lógica de
+  // versiones: solo se oculta el resto de opciones en la lista que se
+  // muestra. Para volver a mostrar todas las versiones, quita este filtro
+  // (o cambia el slice) y vuelve a usar "productos" directamente abajo.
+  const productosVisibles = productos.slice(0, 1);
+
   return (
     <div className="pagina-pedido">
       {mostrarBarra && (
@@ -105,7 +112,7 @@ export default function HacerPedido({ mostrarBarra = true }) {
 
             {!cargandoProductos && (
               <div className="opciones-version">
-                {productos.map((producto) => {
+                {productosVisibles.map((producto) => {
                   const agotado = (producto.stockDisponible ?? 0) <= 0;
                   return (
                     <label

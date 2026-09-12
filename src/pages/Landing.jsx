@@ -68,15 +68,30 @@ export default function Landing() {
     });
   }
 
+  // Progreso de lectura: qué tanto ha bajado la persona en la página,
+  // para la barra fina de la barra superior.
+  const alturaDesplazable =
+    typeof document !== "undefined"
+      ? document.documentElement.scrollHeight - window.innerHeight
+      : 0;
+  const progresoDesplazamiento =
+    alturaDesplazable > 0
+      ? Math.min(100, (desplazamiento / alturaDesplazable) * 100)
+      : 0;
+
   return (
     <div className="landing">
-      <header className="landing-nav">
+      <header className={`landing-nav ${desplazamiento > 40 ? "landing-nav-desplazado" : ""}`}>
         <span className="landing-nav-marca">{/* espacio: nombre corto / logo de marca */}SCILD</span>
         <nav className="landing-nav-links">
           <Link to="/cancelar">Cancelar pedido</Link>
           <Link to="/admin/login">Administrador</Link>
         </nav>
-        
+        <span
+          className="landing-nav-progreso"
+          style={{ width: `${progresoDesplazamiento}%` }}
+          aria-hidden="true"
+        />
       </header>
 
       {/* ---------- HERO CON PARALLAX ---------- */}
@@ -101,12 +116,12 @@ export default function Landing() {
             {/* espacio para el logo de la empresa */}
           </div>
           <h1 className="landing-hero-nombre">
-            {/* espacio para el nombre de la empresa */}
-            Nombre de tu empresa
+            {/* SCILD */}
+            SCILD
           </h1>
           <p className="landing-hero-eslogan">
             {/* espacio para el eslogan o frase de marca */}
-            Espacio para tu eslogan o frase de presentación
+            Cuando más lo necesitas, un solo botón avisa a todos.
           </p>
 
           <button type="button" className="landing-hero-cta" onClick={abrirPedido}>
@@ -121,55 +136,66 @@ export default function Landing() {
       </section>
 
       {/* ---------- SECCIONES DE CONTENIDO (deslizantes al aparecer) ---------- */}
-      <section className="landing-bloque reveal">
-        <div className="landing-bloque-texto">
-          <span className="landing-bloque-etiqueta">Espacio 01</span>
-          <h2>Título de la sección</h2>
+      <section className="landing-bloque">
+        <div className="landing-bloque-texto reveal reveal-derecha">
+          <span className="landing-bloque-etiqueta"></span>
+          <h2>Los robos no avisan.</h2>
           <p>
-            Aquí va la descripción de esta sección. Reemplaza este texto con
-            el contenido real: qué es el producto, para quién es o cómo
-            funciona.
+            Cada día, negocios como el tuyo enfrentan robos sin tener forma de reaccionar a tiempo.
+             Llamar a la policía tarda. Avisar a los vecinos es imposible en el momento.
+             Pero solo necesitas presionar un boton, para poder imformar todos.
+
+
           </p>
         </div>
-        <div className="landing-bloque-media" aria-hidden="true">
-          <span>Espacio para imagen o video</span>
+        <div className="landing-bloque-media reveal reveal-escala">
+          <img src="/img-scild/robo.jpeg" alt="Negocio sufriendo un robo sin forma de pedir ayuda" />
         </div>
       </section>
 
-      <section className="landing-bloque landing-bloque-alterno reveal">
-        <div className="landing-bloque-media" aria-hidden="true">
-          <span>Espacio para imagen o video</span>
+      <section className="landing-bloque landing-bloque-alterno">
+        <div className="landing-bloque-media landing-bloque-media-completa reveal reveal-escala">
+          <img src="/img-scild/alarma.jpeg" alt="Botón de pánico activando una alerta que llega a toda la comunidad de negocios" />
         </div>
-        <div className="landing-bloque-texto">
-          <span className="landing-bloque-etiqueta">Espacio 02</span>
-          <h2>Otro punto clave</h2>
+        <div className="landing-bloque-texto reveal reveal-derecha">
+          <span className="landing-bloque-etiqueta"></span>
+          <h2>Un dispositivo pequeño con un impacto enorme.</h2>
           <p>
-            Usa esta sección para un beneficio, un testimonio o un dato que
-            refuerce la confianza en el producto.
+          El botón de pánico comunitario es un dispositivo compacto que se instala en cualquier negocio.
+          Para conectar toda la comunidad de negocios en tiempo real.
           </p>
         </div>
       </section>
 
-      <section className="landing-tarjetas reveal">
-        <div className="landing-tarjetas-encabezado">
-          <span className="landing-bloque-etiqueta">Espacio 03</span>
-          <h2>Características</h2>
+      <section className="landing-tarjetas">
+        <div className="landing-tarjetas-encabezado reveal">
+          <span className="landing-bloque-etiqueta"></span>
+          <h2>Cómo funciona</h2>
         </div>
         <div className="landing-tarjetas-lista">
-          <article className="landing-tarjeta">
-            <div className="landing-tarjeta-icono" aria-hidden="true" />
-            <h3>Característica uno</h3>
-            <p>Descripción breve de esta característica.</p>
+          <article className="landing-tarjeta reveal reveal-escala">
+            <div className="landing-tarjeta-icono">
+              <img src="/img-scild/c1.jpeg" alt="" />
+            </div>
+            <h3>1. Presionas el botón</h3>
+            <p>Un solo golpe al botón de pánico instalado en tu negocio.
+              No necesitas sacar el celular ni marcar ningún número.</p>
           </article>
-          <article className="landing-tarjeta">
-            <div className="landing-tarjeta-icono" aria-hidden="true" />
-            <h3>Característica dos</h3>
-            <p>Descripción breve de esta característica.</p>
+          <article className="landing-tarjeta reveal reveal-escala">
+            <div className="landing-tarjeta-icono">
+              <img src="/img-scild/c2.jpg" alt="" />
+            </div>
+            <h3>2. La alerta se manda</h3>
+            <p>En un instante, todos los negocios del grupo reciben una notificación
+              en su celular con el nombre de tu negocio y tu dirección exacta.</p>
           </article>
-          <article className="landing-tarjeta">
-            <div className="landing-tarjeta-icono" aria-hidden="true" />
-            <h3>Característica tres</h3>
-            <p>Descripción breve de esta característica.</p>
+          <article className="landing-tarjeta reveal reveal-escala">
+            <div className="landing-tarjeta-icono">
+              <img src="/img-scild/c3.jpg" alt="" />
+            </div>
+            <h3>3. La comunidad reacciona</h3>
+            <p>Tus vecinos están al tanto. Se cierran puertas, se llama a la policía, se actúa.
+              juntos son más fuertes que solos.</p>
           </article>
         </div>
       </section>
