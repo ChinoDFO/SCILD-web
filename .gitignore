@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Vercel (queda al desplegar o ligar el proyecto con `vercel`/`vercel link`)
+.vercel
+
 # Variables de entorno (llaves reales de Firebase, EmailJS, etc.)
 .env
 .env.local
