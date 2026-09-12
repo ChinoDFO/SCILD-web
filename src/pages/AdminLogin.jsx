@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { iniciarSesionAdmin } from "../services/auth";
 import { useAuth } from "../context/AuthContext";
+import { RUTA_ADMIN_PANEL } from "../config/rutas";
 import "./AdminLogin.css";
 
 export default function AdminLogin() {
@@ -16,7 +17,7 @@ export default function AdminLogin() {
 
   useEffect(() => {
     if (!cargando && usuario) {
-      navegar("/admin", { replace: true });
+      navegar(RUTA_ADMIN_PANEL, { replace: true });
     }
   }, [cargando, usuario, navegar]);
 
@@ -26,7 +27,7 @@ export default function AdminLogin() {
     setEnviando(true);
     try {
       await iniciarSesionAdmin(correo, password);
-      navegar("/admin", { replace: true });
+      navegar(RUTA_ADMIN_PANEL, { replace: true });
     } catch (err) {
       console.error(err);
       setError("Correo o contraseña incorrectos.");

@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { RUTA_ADMIN_LOGIN, RUTA_ADMIN_PANEL } from "./config/rutas";
 import RutaProtegida from "./components/RutaProtegida";
 import Landing from "./pages/Landing";
 import AdminLogin from "./pages/AdminLogin";
@@ -12,8 +13,17 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin" element={<RutaProtegida><AdminDashboard /></RutaProtegida>} />
+          {/* Acceso de administrador: ruta secreta, sin ningún enlace
+              visible en la web pública. Ver src/config/rutas.js */}
+          <Route path={RUTA_ADMIN_LOGIN} element={<AdminLogin />} />
+          <Route
+            path={RUTA_ADMIN_PANEL}
+            element={
+              <RutaProtegida>
+                <AdminDashboard />
+              </RutaProtegida>
+            }
+          />
           <Route path="/cancelar" element={<CancelarPedido />} />
         </Routes>
       </AuthProvider>

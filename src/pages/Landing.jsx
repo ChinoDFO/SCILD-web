@@ -85,7 +85,6 @@ export default function Landing() {
         <span className="landing-nav-marca">{/* espacio: nombre corto / logo de marca */}SCILD</span>
         <nav className="landing-nav-links">
           <Link to="/cancelar">Cancelar pedido</Link>
-          <Link to="/admin/login">Administrador</Link>
         </nav>
         <span
           className="landing-nav-progreso"
@@ -113,6 +112,7 @@ export default function Landing() {
           }}
         >
           <div className="landing-hero-logo" aria-hidden="true">
+            <img src="/img-scild/logo_nf.png" alt="" className="landing-hero-logo" />
             {/* espacio para el logo de la empresa */}
           </div>
           <h1 className="landing-hero-nombre">

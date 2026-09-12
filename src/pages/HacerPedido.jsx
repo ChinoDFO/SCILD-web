@@ -91,7 +91,6 @@ export default function HacerPedido({ mostrarBarra = true }) {
           <span className="marca">SCILD</span>
           <nav className="barra-superior-nav">
             <Link to="/cancelar">Cancelar pedido</Link>
-            <Link to="/admin/login">Administrador</Link>
           </nav>
         </header>
       )}

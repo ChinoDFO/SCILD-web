@@ -80,3 +80,10 @@
     flex-direction: column;
   }
 }
+
+.titulo-seccion {
+  margin-bottom: var(--sp-4);
+  font-family: var(--display);
+  font-size: 20px;
+  color: var(--ink);
+}

@@ -47,7 +47,7 @@ export default function CancelarPedido() {
       <header className="barra-superior">
         <Link to="/" className="marca">SCILD</Link>
         <nav className="barra-superior-nav">
-          <Link to="/admin/login">Administrador</Link>
+          <Link to="/">Volver al inicio</Link>
         </nav>
       </header>
 

@@ -8,6 +8,7 @@
 
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { RUTA_ADMIN_LOGIN } from "../config/rutas";
 
 export default function RutaProtegida({ children }) {
   const { usuario, cargando } = useAuth();
@@ -27,7 +28,7 @@ export default function RutaProtegida({ children }) {
   }
 
   if (!usuario) {
-    return <Navigate to="/admin/login" replace />;
+    return <Navigate to={RUTA_ADMIN_LOGIN} replace />;
   }
 
   return children;

@@ -11,6 +11,8 @@ import {
   eliminarPedido,
 } from "../services/pedidos";
 import TarjetaPedido from "../components/TarjetaPedido";
+import PanelStock from "../components/PanelStock";
+import { RUTA_ADMIN_LOGIN } from "../config/rutas";
 import "./AdminDashboard.css";
 
 const FILTROS = [
@@ -49,7 +51,7 @@ export default function AdminDashboard() {
 
   async function manejarCerrarSesion() {
     await cerrarSesionAdmin();
-    navegar("/admin/login", { replace: true });
+    navegar(RUTA_ADMIN_LOGIN, { replace: true });
   }
 
   const pedidosFiltrados =
@@ -66,13 +68,17 @@ export default function AdminDashboard() {
     <main className="panel-admin entrada">
       <header className="panel-admin-cabecera">
         <div>
-          <h1>Pedidos — SCILD</h1>
+          <h1>Panel — SCILD</h1>
           <p className="sesion-actual">Sesión: {usuario?.email}</p>
         </div>
         <button type="button" onClick={manejarCerrarSesion}>
           Cerrar sesión
         </button>
       </header>
+
+      <PanelStock />
+
+      <h2 className="titulo-seccion">Pedidos</h2>
 
       <nav className="filtros-estado">
         {FILTROS.map(({ valor, etiqueta }) => (

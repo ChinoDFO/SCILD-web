@@ -124,20 +124,14 @@
 }
 
 .landing-hero-logo {
-  width: 96px;
-  height: 96px;
-  border-radius: 50%;
-  border: 1.5px dashed rgba(255, 255, 255, 0.35);
+  width: 165px;
+  height: 165px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: rgba(255, 255, 255, 0.4);
   font-size: 12px;
   animation: aparecer 0.7s ease-out both, landing-logo-flotar 5s ease-in-out 0.7s infinite;
-}
-
-.landing-hero-logo::after {
-  content: "Logo";
 }
 
 .landing-hero-nombre {

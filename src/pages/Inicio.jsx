@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { listarProductos } from "../services/productos";
 import "./Inicio.css";
 
@@ -68,9 +67,6 @@ function Inicio() {
         </div>
       )}
 
-      <p className="enlace-admin">
-        <Link to="/admin/login">Entrar como administrador</Link>
-      </p>
     </main>
   );
 }
