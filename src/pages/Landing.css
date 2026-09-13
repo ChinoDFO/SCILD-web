@@ -108,10 +108,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   text-align: center;
   overflow: hidden;
   background: var(--paper);
+  padding: var(--sp-8) 0 var(--sp-6);
 }
 
 .landing-hero-capa {
@@ -189,6 +189,11 @@
   padding: 0 var(--sp-5);
   max-width: 640px;
   transition: opacity 0.1s linear;
+  /* lo centra verticalmente usando el espacio libre de .landing-hero,
+     pero sin sacarlo del flujo: así nunca puede quedar encima (ni debajo)
+     del aviso de "desliza para conocer más", pase lo que pase con el
+     alto de la pantalla. */
+  margin: auto 0;
 }
 
 .landing-hero-logo {
@@ -249,11 +254,13 @@
 }
 
 .landing-hero-scroll {
-  position: absolute;
-  bottom: var(--sp-6);
-  left: 50%;
-  transform: translateX(-50%);
+  /* en el flujo normal (ya no "position: absolute"), justo debajo del
+     contenido del hero: así nunca se le puede encimar al botón, ni
+     aunque la pantalla sea baja (una laptop, un celular acostado). */
+  position: relative;
   z-index: 1;
+  flex: none;
+  margin-top: var(--sp-6);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -325,13 +332,11 @@
   padding: var(--sp-8) var(--sp-5);
 }
 
-.landing-bloque-alterno {
-  direction: rtl;
-}
-
-.landing-bloque-alterno > * {
-  direction: ltr;
-}
+/* "alterno" no necesita voltear la dirección del texto (eso causaba que
+   los dos bloques de texto no quedaran alineados igual): como en su JSX
+   la imagen va primero y el texto después, en un grid normal (de
+   izquierda a derecha) ya caen solos en lados opuestos al primer bloque:
+   ahí la imagen queda a la izquierda y el texto a la derecha. */
 
 .landing-bloque-texto {
   display: flex;
@@ -643,10 +648,6 @@
     grid-template-columns: 1fr;
     gap: var(--sp-5);
     padding: var(--sp-7) var(--sp-4);
-  }
-
-  .landing-bloque-alterno {
-    direction: ltr;
   }
 
   .landing-bloque-texto p {
