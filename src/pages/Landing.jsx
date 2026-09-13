@@ -199,7 +199,7 @@ export default function Landing() {
              Pero solo necesitas presionar un boton, para poder imformar todos.
           </p>
         </div>
-        <div className="landing-bloque-media reveal reveal-izquierda">
+        <div className="landing-bloque-media reveal">
           <img src="/img-scild/robo.jpeg" alt="Negocio sufriendo un robo sin forma de pedir ayuda" />
         </div>
       </section>
@@ -214,7 +214,7 @@ export default function Landing() {
           en esta sección, solo cambia el orden de los dos <div> de aquí
           abajo (pon primero el que dice "landing-bloque-texto"). */}
       <section className="landing-bloque landing-bloque-alterno">
-        <div className="landing-bloque-media landing-bloque-media-completa reveal reveal-derecha">
+        <div className="landing-bloque-media landing-bloque-media-completa reveal ">
           <img src="/img-scild/alarma.jpeg" alt="Botón de pánico activando una alerta que llega a toda la comunidad de negocios" />
         </div>
         <div className="landing-bloque-texto reveal reveal">
