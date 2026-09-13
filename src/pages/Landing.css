@@ -213,11 +213,11 @@
      pantallas grandes; "60vw" hace que, si la pantalla es más angosta
      que eso, ocupe el 60% del ancho de la pantalla en vez de recortarse
      o quedar chiquitísimo. "height: auto" + "aspect-ratio" mantienen
-     siempre las proporciones reales del logo (500x305) sin deformarlo.
+     siempre las proporciones reales del logo (450x250) sin deformarlo.
      ¿Lo quieres más grande o más chico en celular? Sube o baja el 60vw
      (por ejemplo 70vw para más grande, 45vw para más chico). */
   width: min(500px, 60vw);
-  aspect-ratio: 500 / 305;
+  aspect-ratio: 450 / 250;
   height: auto;
   display: flex;
   align-items: center;
