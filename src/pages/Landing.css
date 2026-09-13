@@ -107,6 +107,15 @@
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  /* Acá se decide hacia dónde se acomoda TODO el contenido del hero
+     (el logo, "SCILD", la frase y el botón "Pedir tu botón"). Cambia
+     estos dos valores JUNTOS (align-items y text-align deben combinar):
+       centrado (como está ahora) -> align-items: center;   text-align: center;
+       a la izquierda             -> align-items: flex-start; text-align: left;
+       a la derecha               -> align-items: flex-end;   text-align: right;
+     Si lo mueves a la izquierda o derecha, es buena idea agregarle un
+     padding-left/padding-right en .landing-hero-contenido (más abajo)
+     para que no quede pegado al borde de la pantalla. */
   align-items: center;
   text-align: center;
   overflow: hidden;
@@ -184,6 +193,8 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
+  /* Debe ir igual que "align-items" de .landing-hero (arriba): center,
+     flex-start (izquierda) o flex-end (derecha). */
   align-items: center;
   gap: var(--sp-4);
   padding: 0 var(--sp-5);
@@ -336,11 +347,24 @@
    los dos bloques de texto no quedaran alineados igual): como en su JSX
    la imagen va primero y el texto después, en un grid normal (de
    izquierda a derecha) ya caen solos en lados opuestos al primer bloque:
-   ahí la imagen queda a la izquierda y el texto a la derecha. */
+   ahí la imagen queda a la izquierda y el texto a la derecha.
+
+   ¿Quieres que en vez de imagen-texto quede texto-imagen (o al revés)
+   en alguna de las dos secciones? Eso NO se cambia aquí: se cambia en
+   Landing.jsx, reordenando ahí los dos <div> (el de la imagen y el del
+   texto) dentro de esa sección — el que va primero en el código queda
+   a la izquierda. */
 
 .landing-bloque-texto {
   display: flex;
   flex-direction: column;
+  /* Posición del título y el párrafo DENTRO de su columna (no decide si
+     la columna completa está a la izq. o der. de la pantalla — eso es
+     el orden en el JSX, ver la nota de arriba). Cambia estos dos valores
+     JUNTOS:
+       centrado (como está ahora) -> align-items: center;    text-align: center;
+       pegado a la izquierda      -> align-items: flex-start; text-align: left;
+       pegado a la derecha        -> align-items: flex-end;   text-align: right; */
   align-items: center;
   text-align: center;
 }
@@ -414,6 +438,9 @@
 }
 
 .landing-tarjetas-encabezado {
+  /* "Cómo funciona" y su texto. Cambia a "left" o "right" para mover el
+     título de esta sección; si lo mueves, quita también el
+     "margin: 0 auto" de abajo (ese es el que lo centra en la página). */
   text-align: center;
   max-width: 520px;
   margin: 0 auto var(--sp-7);
@@ -426,6 +453,10 @@
 }
 
 .landing-tarjeta {
+  /* El texto de cada tarjeta ("1. Presionas el botón", etc.) sale pegado
+     a la izquierda porque no tiene "text-align" definido (así se
+     comporta un párrafo normal). Si lo quieres centrado, agrega aquí:
+       text-align: center; */
   padding: var(--sp-5);
   border-radius: var(--r-lg);
   border: 1px solid var(--line);
@@ -499,6 +530,8 @@
 /* ---------- CTA FINAL ---------- */
 
 .landing-cta-final {
+  /* "¿Listo para tu botón SCILD?" — cambia a "left" o "right" para mover
+     este bloque final (título, texto y botón van todos juntos). */
   text-align: center;
   padding: var(--sp-8) var(--sp-5);
   background: var(--violet-tint);
@@ -533,6 +566,8 @@
 /* ---------- FOOTER ---------- */
 
 .landing-footer {
+  /* "© 2026 SCILD" del final de la página. Cambia a "left" o "right"
+     para moverlo. */
   padding: var(--sp-5);
   text-align: center;
   color: var(--ink-soft);

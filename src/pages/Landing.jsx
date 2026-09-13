@@ -94,6 +94,10 @@ export default function Landing() {
       </header>
 
       {/* ---------- HERO CON PARALLAX ---------- */}
+      {/* El logo, "SCILD", la frase y el botón salen centrados. Para
+          moverlos a la izquierda o a la derecha, eso se ajusta en
+          Landing.css: ".landing-hero" y ".landing-hero-contenido"
+          (align-items + text-align). */}
       <section className="landing-hero">
         <div
           className="landing-hero-capa landing-hero-capa-fondo"
@@ -177,9 +181,16 @@ export default function Landing() {
 
       {/* ---------- SECCIONES DE CONTENIDO (deslizantes al aparecer) ---------- */}
       {/* "El problema": toda la sección entra deslizándose de izquierda a
-          derecha, como una ventana que se abre desde el borde izquierdo. */}
+          derecha, como una ventana que se abre desde el borde izquierdo.
+
+          El div que va PRIMERO aquí abajo (el texto) es el que queda del
+          lado IZQUIERDO de la pantalla, y el segundo (la imagen) del lado
+          DERECHO. Si los cambias de orden, cambian de lado.
+          Para mover el texto/título DENTRO de su lado (centrado, pegado a
+          la izq. o a la der.), eso se ajusta en Landing.css, en
+          ".landing-bloque-texto" (align-items + text-align). */}
       <section className="landing-bloque">
-        <div className="landing-bloque-texto reveal reveal-izquierda">
+        <div className="landing-bloque-texto reveal ">
           <span className="landing-bloque-etiqueta"></span>
           <h2>Los robos no avisan.</h2>
           <p>
@@ -195,12 +206,18 @@ export default function Landing() {
 
       {/* "La explicación": entra de derecha a izquierda, en sentido
           contrario a la sección anterior, para que la página se sienta
-          más dinámica al bajar. */}
+          más dinámica al bajar.
+
+          Aquí la imagen va PRIMERO (queda a la izquierda) y el texto
+          SEGUNDO (queda a la derecha) — al revés que en la sección de
+          arriba. Si quieres que también el texto quede a la izquierda
+          en esta sección, solo cambia el orden de los dos <div> de aquí
+          abajo (pon primero el que dice "landing-bloque-texto"). */}
       <section className="landing-bloque landing-bloque-alterno">
         <div className="landing-bloque-media landing-bloque-media-completa reveal reveal-derecha">
           <img src="/img-scild/alarma.jpeg" alt="Botón de pánico activando una alerta que llega a toda la comunidad de negocios" />
         </div>
-        <div className="landing-bloque-texto reveal reveal-derecha">
+        <div className="landing-bloque-texto reveal reveal">
           <span className="landing-bloque-etiqueta"></span>
           <h2>Un dispositivo pequeño con un impacto enorme.</h2>
           <p>
@@ -244,6 +261,8 @@ export default function Landing() {
       </section>
 
       {/* ---------- LLAMADO A LA ACCIÓN FINAL ---------- */}
+      {/* Para mover este bloque a la izquierda/derecha: Landing.css,
+          ".landing-cta-final" (text-align). */}
       <section className="landing-cta-final reveal">
         <h2>¿Listo para tu botón SCILD?</h2>
         <p>Una alerta a todo tu equipo, al instante.</p>
