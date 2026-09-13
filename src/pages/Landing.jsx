@@ -145,10 +145,6 @@ export default function Landing() {
             <img src="/img-scild/logo_nf.png" alt="" className="landing-hero-logo" />
             {/* espacio para el logo de la empresa */}
           </div>
-          <h1 className="landing-hero-nombre">
-            {/* SCILD */}
-            SCILD
-          </h1>
           <p className="landing-hero-eslogan">
             {/* espacio para el eslogan o frase de marca */}
             Cuando más lo necesitas, un solo botón avisa a todos.
