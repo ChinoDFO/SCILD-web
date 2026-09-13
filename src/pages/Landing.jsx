@@ -147,7 +147,7 @@ export default function Landing() {
           </div>
           <p className="landing-hero-eslogan">
             {/* espacio para el eslogan o frase de marca */}
-            Cuando más lo necesitas, un solo botón avisa a todos.
+            Imaginamos el riesgo. Diseñamos la respuesta.
           </p>
 
           <button type="button" className="landing-hero-cta" onClick={abrirPedido}>
