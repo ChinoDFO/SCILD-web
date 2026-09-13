@@ -9,6 +9,7 @@ import {
   collection,
   onSnapshot,
   doc,
+  getDoc,
   updateDoc,
   deleteDoc,
   serverTimestamp,
@@ -132,6 +133,42 @@ export async function crearPedido(datosFormulario) {
     numeroPedido: numeroPedidoAsignado,
     codigoEntrega,
     creadoEn: new Date(),
+  };
+}
+
+/**
+ * Consulta el estado de un pedido para la página pública "Gestionar
+ * pedido". El ID del documento ES el código que se le dio a la persona al
+ * hacer el pedido (igual que en cancelarPedido). Se valida nombre y correo
+ * para no dejar que cualquiera con el código vea los datos de otra persona.
+ *
+ * @returns {Promise<object>} los datos del pedido, con su id incluido
+ */
+export async function obtenerPedido({ codigo, nombre, correo }) {
+  const referenciaPedido = doc(db, "Pedidos", codigo.trim());
+  const pedidoSnap = await getDoc(referenciaPedido);
+
+  if (!pedidoSnap.exists()) {
+    throw new Error("No encontramos ningún pedido con ese código.");
+  }
+
+  const pedido = pedidoSnap.data();
+  if (pedido.nombre !== nombre.trim() || pedido.correo !== correo.trim()) {
+    throw new Error("El nombre o el correo no coinciden con este pedido.");
+  }
+
+  const cancelableHasta = pedido.cancelableHasta?.toDate?.() ?? null;
+  const puedeCancelarse =
+    pedido.estado === "pendiente" ||
+    (pedido.estado === "confirmado" &&
+      cancelableHasta !== null &&
+      new Date() <= cancelableHasta);
+
+  return {
+    id: pedidoSnap.id,
+    ...pedido,
+    cancelableHasta,
+    puedeCancelarse,
   };
 }
 

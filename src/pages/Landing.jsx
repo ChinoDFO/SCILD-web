@@ -1,8 +1,8 @@
 // src/pages/Landing.jsx
 
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import HacerPedido from "./HacerPedido";
+import MenuGestion from "../components/MenuGestion";
 import "./Landing.css";
 
 function useRevelarAlDesplazar() {
@@ -84,7 +84,7 @@ export default function Landing() {
       <header className={`landing-nav ${desplazamiento > 40 ? "landing-nav-desplazado" : ""}`}>
         <span className="landing-nav-marca">{/* espacio: nombre corto / logo de marca */}SCILD</span>
         <nav className="landing-nav-links">
-          <Link to="/cancelar">Cancelar pedido</Link>
+          <MenuGestion onPedir={abrirPedido} />
         </nav>
         <span
           className="landing-nav-progreso"
@@ -103,6 +103,32 @@ export default function Landing() {
           className="landing-hero-capa landing-hero-capa-brillo"
           style={{ transform: `translate3d(0, ${desplazamiento * 0.18}px, 0)` }}
         />
+        <div className="landing-hero-destellos" aria-hidden="true">
+          {Array.from({ length: 18 }).map((_, indice) => {
+            // Posiciones y tiempos "al azar" pero fijos (no cambian en cada
+            // render): cada destello usa el índice para variar su lugar,
+            // tamaño y ritmo de parpadeo.
+            const izquierda = (indice * 53) % 100;
+            const arriba = (indice * 31) % 100;
+            const retraso = (indice % 6) * 0.6;
+            const duracion = 3 + (indice % 4);
+            const tamano = 2 + (indice % 3);
+            return (
+              <span
+                key={indice}
+                className="destello"
+                style={{
+                  left: `${izquierda}%`,
+                  top: `${arriba}%`,
+                  width: `${tamano}px`,
+                  height: `${tamano}px`,
+                  animationDelay: `${retraso}s`,
+                  animationDuration: `${duracion}s`,
+                }}
+              />
+            );
+          })}
+        </div>
 
         <div
           className="landing-hero-contenido"
@@ -130,31 +156,48 @@ export default function Landing() {
         </div>
 
         <div className="landing-hero-scroll" aria-hidden="true">
-          <span className="landing-hero-scroll-linea" />
           Desliza para conocer más
+          <svg
+            className="landing-hero-scroll-flecha"
+            width="18"
+            height="18"
+            viewBox="0 0 18 18"
+          >
+            <path
+              d="M3 6 L9 12 L15 6"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </div>
       </section>
 
       {/* ---------- SECCIONES DE CONTENIDO (deslizantes al aparecer) ---------- */}
+      {/* "El problema": toda la sección entra deslizándose de izquierda a
+          derecha, como una ventana que se abre desde el borde izquierdo. */}
       <section className="landing-bloque">
-        <div className="landing-bloque-texto reveal reveal-derecha">
+        <div className="landing-bloque-texto reveal reveal-izquierda">
           <span className="landing-bloque-etiqueta"></span>
           <h2>Los robos no avisan.</h2>
           <p>
             Cada día, negocios como el tuyo enfrentan robos sin tener forma de reaccionar a tiempo.
              Llamar a la policía tarda. Avisar a los vecinos es imposible en el momento.
              Pero solo necesitas presionar un boton, para poder imformar todos.
-
-
           </p>
         </div>
-        <div className="landing-bloque-media reveal reveal-escala">
+        <div className="landing-bloque-media reveal reveal-izquierda">
           <img src="/img-scild/robo.jpeg" alt="Negocio sufriendo un robo sin forma de pedir ayuda" />
         </div>
       </section>
 
+      {/* "La explicación": entra de derecha a izquierda, en sentido
+          contrario a la sección anterior, para que la página se sienta
+          más dinámica al bajar. */}
       <section className="landing-bloque landing-bloque-alterno">
-        <div className="landing-bloque-media landing-bloque-media-completa reveal reveal-escala">
+        <div className="landing-bloque-media landing-bloque-media-completa reveal reveal-derecha">
           <img src="/img-scild/alarma.jpeg" alt="Botón de pánico activando una alerta que llega a toda la comunidad de negocios" />
         </div>
         <div className="landing-bloque-texto reveal reveal-derecha">

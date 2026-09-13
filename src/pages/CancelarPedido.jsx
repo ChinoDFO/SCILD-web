@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { cancelarPedido } from "../services/pedidos";
 import { enviarCorreoPedidoCancelado } from "../services/notificaciones";
+import MenuGestion from "../components/MenuGestion";
 import "./CancelarPedido.css";
 
 const DATOS_INICIALES = { nombre: "", correo: "", codigo: "" };
@@ -46,9 +47,7 @@ export default function CancelarPedido() {
     <div className="pagina-cancelar-wrap">
       <header className="barra-superior">
         <Link to="/" className="marca">SCILD</Link>
-        <nav className="barra-superior-nav">
-          <Link to="/">Volver al inicio</Link>
-        </nav>
+        <MenuGestion />
       </header>
 
       {cancelado ? (

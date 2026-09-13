@@ -6,6 +6,7 @@ import Landing from "./pages/Landing";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import CancelarPedido from "./pages/CancelarPedido";
+import GestionarPedido from "./pages/GestionarPedido";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             }
           />
           <Route path="/cancelar" element={<CancelarPedido />} />
+          <Route path="/gestionar" element={<GestionarPedido />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

@@ -1,11 +1,11 @@
 // src/pages/HacerPedido.jsx
 
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { listarProductos } from "../services/productos";
 import { crearPedido } from "../services/pedidos";
 import { enviarCorreoNuevoPedidoAdmin } from "../services/notificaciones";
 import ResumenPedido from "../components/ResumenPedido";
+import MenuGestion from "../components/MenuGestion";
 import "./HacerPedido.css";
 
 const DATOS_INICIALES = {
@@ -89,9 +89,7 @@ export default function HacerPedido({ mostrarBarra = true }) {
       {mostrarBarra && (
         <header className="barra-superior">
           <span className="marca">SCILD</span>
-          <nav className="barra-superior-nav">
-            <Link to="/cancelar">Cancelar pedido</Link>
-          </nav>
+          <MenuGestion />
         </header>
       )}
 

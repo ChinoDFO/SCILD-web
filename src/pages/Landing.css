@@ -1,6 +1,44 @@
 .landing {
   min-height: 100svh;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* destellos sutiles y fijos detrás de toda la página (no solo el hero):
+   se ven igual bajando en computadora o en celular, porque son fijos con
+   respecto a la pantalla, no a cada sección. */
+.landing::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 255, 255, 0.5), transparent 60%),
+    radial-gradient(1.5px 1.5px at 78% 8%, rgba(255, 255, 255, 0.4), transparent 60%),
+    radial-gradient(2px 2px at 32% 62%, rgba(167, 139, 250, 0.55), transparent 60%),
+    radial-gradient(1.5px 1.5px at 92% 46%, rgba(255, 255, 255, 0.35), transparent 60%),
+    radial-gradient(2px 2px at 58% 82%, rgba(139, 92, 246, 0.5), transparent 60%),
+    radial-gradient(1.5px 1.5px at 6% 74%, rgba(255, 255, 255, 0.4), transparent 60%),
+    radial-gradient(1.5px 1.5px at 45% 30%, rgba(255, 255, 255, 0.3), transparent 60%),
+    radial-gradient(2px 2px at 85% 88%, rgba(167, 139, 250, 0.4), transparent 60%);
+  animation: landing-fondo-parpadeo 7s ease-in-out infinite alternate;
+}
+
+@keyframes landing-fondo-parpadeo {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing::before {
+    animation: none;
+    opacity: 0.75;
+  }
 }
 
 /* ---------- BARRA SUPERIOR ---------- */
@@ -111,6 +149,36 @@
   }
 }
 
+/* pequeños destellos flotando en el fondo del hero, como estrellas */
+.landing-hero-destellos {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.destello {
+  position: absolute;
+  border-radius: 50%;
+  background: #fff;
+  opacity: 0;
+  animation-name: landing-destello-parpadeo;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.6);
+}
+
+@keyframes landing-destello-parpadeo {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1);
+  }
+}
+
 .landing-hero-contenido {
   position: relative;
   z-index: 1;
@@ -196,28 +264,20 @@
   text-transform: uppercase;
 }
 
-.landing-hero-scroll-linea {
-  width: 1px;
-  height: 34px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), transparent);
-  animation: landing-scroll-linea 1.8s ease-in-out infinite;
+.landing-hero-scroll-flecha {
+  color: rgba(255, 255, 255, 0.75);
+  animation: landing-scroll-flecha 1.6s ease-in-out infinite;
 }
 
-@keyframes landing-scroll-linea {
-  0% {
-    transform: scaleY(0.3);
-    transform-origin: top;
-    opacity: 0.3;
+@keyframes landing-scroll-flecha {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
   }
   50% {
-    transform: scaleY(1);
-    transform-origin: top;
+    transform: translateY(6px);
     opacity: 1;
-  }
-  100% {
-    transform: scaleY(0.3);
-    transform-origin: bottom;
-    opacity: 0.3;
   }
 }
 
@@ -273,6 +333,13 @@
   direction: ltr;
 }
 
+.landing-bloque-texto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .landing-bloque-etiqueta {
   display: inline-block;
   font-size: 13px;
@@ -290,10 +357,13 @@
 .landing-bloque-texto p {
   color: var(--ink-soft);
   font-size: 17px;
-  max-width: 46ch;
+  max-width: 42ch;
 }
 
 .landing-bloque-media {
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
   aspect-ratio: 4 / 3;
   border-radius: var(--r-lg);
   border: 1px solid var(--line);
@@ -583,13 +653,18 @@
     max-width: none;
   }
 
-  /* en una sola columna, la entrada lateral se ve más comedida */
+  .landing-bloque-media {
+    max-width: 260px;
+  }
+
+  /* en una sola columna, la entrada lateral se ve más comedida y no deja
+     nada fuera de la pantalla mientras aparece */
   .reveal-izquierda {
-    transform: translateX(-28px);
+    transform: translateX(-20px);
   }
 
   .reveal-derecha {
-    transform: translateX(28px);
+    transform: translateX(20px);
   }
 
   .landing-tarjetas-lista {
@@ -617,8 +692,13 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .landing-hero-scroll-linea {
+  .landing-hero-scroll-flecha {
     animation: none;
+  }
+
+  .destello {
+    animation: none;
+    opacity: 0.4;
   }
 
   .landing-tarjeta.reveal-visible .landing-tarjeta-icono {
