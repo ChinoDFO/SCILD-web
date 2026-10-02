@@ -1,7 +1,17 @@
 .pagina-gestionar-wrap {
+  /* Misma paleta negra/gris que la portada (ver Landing.css): se
+     redefinen aquí las variables de marca, sin tocar el resto del sitio. */
+  --paper: #000000;
+  --surface: #141414;
+  --line: #292929;
+  --ink-soft: #a3a3a3;
+  --violet: #d4d4d4;
+  --violet-strong: #ffffff;
+  --violet-tint: #1a1a1a;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  background: var(--paper);
 }
 
 .pagina-gestionar {
@@ -57,16 +67,16 @@
   padding: 13px;
   border: none;
   border-radius: var(--r-sm);
-  background: var(--violet);
-  color: #fff;
+  background: #fff;
+  color: #141414;
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
 }
 
 .formulario-gestionar button:hover:not(:disabled) {
-  background: var(--violet-strong);
-  box-shadow: 0 8px 20px -8px rgba(139, 92, 246, 0.6);
+  background: #e8e8e8;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.5);
 }
 
 .formulario-gestionar button:disabled {
@@ -91,6 +101,7 @@
   border: 1px solid var(--line);
   background: var(--surface);
   border-left: 3px solid var(--line);
+  box-shadow: 0 0 50px -12px rgba(255, 255, 255, 0.14);
 }
 
 .tarjeta-estado-etiqueta {

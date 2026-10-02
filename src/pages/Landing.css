@@ -1,44 +1,37 @@
 .landing {
+  /* Paleta solo para esta página (no toca el resto del sitio): se
+     redefinen aquí las variables de color de marca y todo lo que ya las
+     usa adentro de .landing (hero, tarjetas, panel de pedido, etc.) las
+     hereda automáticamente, sin tener que tocar cada regla.
+     A propósito es una paleta sin morado ni azul: negro puro de fondo y
+     solo grises para acentos/estados. */
+  --paper: #000000;
+  --surface: #141414;
+  --line: #292929;
+  --ink-soft: #a3a3a3;
+  --violet: #d4d4d4;
+  --violet-strong: #ffffff;
+  --violet-tint: #1a1a1a;
   min-height: 100svh;
   overflow-x: hidden;
   position: relative;
+  background: var(--paper);
 }
 
-/* destellos sutiles y fijos detrás de toda la página (no solo el hero):
-   se ven igual bajando en computadora o en celular, porque son fijos con
-   respecto a la pantalla, no a cada sección. */
+/* textura muy sutil y fija (no animada) para que el negro no se sienta
+   plano: una retícula de puntos casi imperceptible detrás de todo. */
 .landing::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image:
-    radial-gradient(1.5px 1.5px at 12% 18%, rgba(255, 255, 255, 0.5), transparent 60%),
-    radial-gradient(1.5px 1.5px at 78% 8%, rgba(255, 255, 255, 0.4), transparent 60%),
-    radial-gradient(2px 2px at 32% 62%, rgba(167, 139, 250, 0.55), transparent 60%),
-    radial-gradient(1.5px 1.5px at 92% 46%, rgba(255, 255, 255, 0.35), transparent 60%),
-    radial-gradient(2px 2px at 58% 82%, rgba(139, 92, 246, 0.5), transparent 60%),
-    radial-gradient(1.5px 1.5px at 6% 74%, rgba(255, 255, 255, 0.4), transparent 60%),
-    radial-gradient(1.5px 1.5px at 45% 30%, rgba(255, 255, 255, 0.3), transparent 60%),
-    radial-gradient(2px 2px at 85% 88%, rgba(167, 139, 250, 0.4), transparent 60%);
-  animation: landing-fondo-parpadeo 7s ease-in-out infinite alternate;
-}
-
-@keyframes landing-fondo-parpadeo {
-  0% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .landing::before {
-    animation: none;
-    opacity: 0.75;
-  }
+  opacity: 0.5;
+  background-image: radial-gradient(
+    rgba(255, 255, 255, 0.07) 1px,
+    transparent 1px
+  );
+  background-size: 28px 28px;
 }
 
 /* ---------- BARRA SUPERIOR ---------- */
@@ -53,7 +46,7 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--sp-4) var(--sp-5);
-  background: rgba(18, 13, 26, 0.7);
+  background: rgba(8, 8, 8, 0.7);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid transparent;
@@ -62,7 +55,7 @@
 
 /* al bajar un poco, la barra se ve más sólida (feedback de que la página reacciona al scroll) */
 .landing-nav-desplazado {
-  background: rgba(18, 13, 26, 0.92);
+  background: rgba(8, 8, 8, 0.92);
   border-bottom-color: rgba(255, 255, 255, 0.08);
   padding-top: var(--sp-3);
   padding-bottom: var(--sp-3);
@@ -79,10 +72,31 @@
 }
 
 .landing-nav-marca {
-  font-family: var(--display);
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--ink);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.landing-nav-marca-logo {
+  height: 48px;
+  width: auto;
+  display: block;
+  animation: landing-marca-latido 2.4s ease-in-out infinite;
+}
+
+/* "late" (respira) sutilmente, sin ningún destello de color detrás */
+@keyframes landing-marca-latido {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
 }
 
 .landing-nav-links {
@@ -130,62 +144,26 @@
 }
 
 .landing-hero-capa-fondo {
+  /* Negro de punta a punta; el único "degradado" es un gris casi
+     imperceptible arriba al centro, nada de color. */
   background: radial-gradient(
       120% 90% at 50% 0%,
-      #3d2166 0%,
+      #161616 0%,
       var(--paper) 62%
     ),
-    linear-gradient(180deg, var(--paper) 0%, #0a0712 100%);
+    linear-gradient(180deg, var(--paper) 0%, #000 100%);
 }
 
+/* resplandor quieto (sin parpadeo ni color): le da profundidad al negro
+   sin destellar. */
 .landing-hero-capa-brillo {
   background: radial-gradient(
     45% 35% at 78% 18%,
-    rgba(139, 92, 246, 0.45) 0%,
-    rgba(139, 92, 246, 0) 70%
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0) 70%
   );
   mix-blend-mode: screen;
-  animation: landing-brillo-pulso 9s ease-in-out infinite;
-}
-
-@keyframes landing-brillo-pulso {
-  0%,
-  100% {
-    opacity: 0.65;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-/* pequeños destellos flotando en el fondo del hero, como estrellas */
-.landing-hero-destellos {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-.destello {
-  position: absolute;
-  border-radius: 50%;
-  background: #fff;
-  opacity: 0;
-  animation-name: landing-destello-parpadeo;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-  box-shadow: 0 0 6px 1px rgba(255, 255, 255, 0.6);
-}
-
-@keyframes landing-destello-parpadeo {
-  0%,
-  100% {
-    opacity: 0;
-    transform: scale(0.6);
-  }
-  50% {
-    opacity: 0.85;
-    transform: scale(1);
-  }
+  opacity: 0.8;
 }
 
 .landing-hero-contenido {
@@ -208,32 +186,19 @@
 }
 
 .landing-hero-logo {
-  /* Tamaño del logo: se achica solo en pantallas angostas (celular) en
-     vez de saltar a un tamaño fijo diminuto. "500px" es el máximo en
-     pantallas grandes; "60vw" hace que, si la pantalla es más angosta
-     que eso, ocupe el 60% del ancho de la pantalla en vez de recortarse
-     o quedar chiquitísimo. "height: auto" + "aspect-ratio" mantienen
-     siempre las proporciones reales del logo (450x250) sin deformarlo.
-     ¿Lo quieres más grande o más chico en celular? Sube o baja el 60vw
-     (por ejemplo 70vw para más grande, 45vw para más chico). */
-  width: min(500px, 80vw);
-  aspect-ratio: 450 / 250;
+  /* El logo (escudo + venado + "SCILD") ahora es blanco con fondo
+     transparente: "drop-shadow" seguido dos veces (una cerrada, una
+     más abierta) dibuja un resplandor blanco suave que sigue la forma
+     real del logo en vez de un rectángulo, sin que se vea brillante.
+     Tamaño: se achica solo en pantallas angostas (celular) en vez de
+     saltar a un tamaño fijo diminuto. ¿Más grande o más chico en
+     celular? Sube o baja el 60vw (por ejemplo 70vw para más grande). */
+  width: min(300px, 60vw);
+  aspect-ratio: 1 / 1;
   height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255, 255, 255, 0.4);
-  font-size: 12px;
+  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.3))
+    drop-shadow(0 0 46px rgba(255, 255, 255, 0.16));
   animation: aparecer 0.7s ease-out both, landing-logo-flotar 5s ease-in-out 0.7s infinite;
-}
-
-.landing-hero-nombre {
-  font-family: var(--display);
-  font-size: clamp(36px, 6vw, 64px);
-  line-height: 1.08;
-  color: #fff;
-  letter-spacing: -0.5px;
-  animation: aparecer 0.7s ease-out 0.1s both;
 }
 
 .landing-hero-eslogan {
@@ -259,18 +224,31 @@
   border: none;
   border-radius: var(--r-md);
   background: #fff;
-  color: #4c1d95;
+  color: #141414;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.5);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  animation: aparecer 0.7s ease-out 0.3s both;
+  /* "aparecer" la trae a escena; un segundo después arranca el latido
+     (un pulso de resplandor, como el de una alerta) y no se detiene. */
+  animation: aparecer 0.7s ease-out 0.3s both,
+    landing-cta-latido 2.4s ease-in-out 1s infinite;
 }
 
 .landing-hero-cta:hover {
   transform: translateY(-2px);
   box-shadow: 0 16px 34px -12px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes landing-cta-latido {
+  0%,
+  100% {
+    box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.5), 0 0 0 0 rgba(255, 255, 255, 0.35);
+  }
+  50% {
+    box-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.5), 0 0 22px 6px rgba(255, 255, 255, 0.3);
+  }
 }
 
 .landing-hero-scroll {
@@ -321,16 +299,6 @@
   transform: none;
 }
 
-/* variantes de entrada: cada tipo de contenido se abre desde un lado distinto,
-   para que la página se sienta más viva conforme se va bajando */
-.reveal-izquierda {
-  transform: translateX(-56px);
-}
-
-.reveal-derecha {
-  transform: translateX(56px);
-}
-
 .reveal-escala {
   transform: scale(0.9);
 }
@@ -343,39 +311,86 @@
 }
 
 .landing-bloque {
+  /* Sin "max-width": la tarjeta de adentro ocupa todo el ancho de la
+     pantalla, con solo un respiro angosto a los lados (el padding). */
+  padding: var(--sp-8) var(--sp-5);
+}
+
+/* ".landing-bloque" (la <section>) es el "sensor" que el navegador vigila
+   para saber cuándo esta parte de la página entra en pantalla: a
+   propósito NUNCA se mueve ni cambia de opacidad ella misma (solo recibe
+   la clase "reveal-visible" cuando toca). Si se moviera ella misma fuera
+   de la pantalla, el navegador jamás la vería "visible" y la tarjeta
+   nunca aparecería. */
+.landing-bloque.reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Toda la sección (texto + imagen) vive dentro de UNA sola tarjeta, con
+   el mismo lenguaje visual que las tarjetas de "Cómo funciona" (borde,
+   fondo "surface", sombra). Es ESTA tarjeta la que de verdad arranca
+   fuera de la pantalla y se desliza hacia la derecha, muy lento y suave,
+   hasta quedar centrada. Ya revelada, solo reacciona con un hover chico.
+
+   "alterno" no necesita voltear nada aquí: como en su JSX la imagen va
+   primero y el texto después, en un grid normal (de izquierda a derecha)
+   ya caen solos en lados opuestos al primer bloque.
+
+   ¿Quieres que en vez de imagen-texto quede texto-imagen (o al revés)
+   en alguna de las dos secciones? Eso se cambia en Landing.jsx,
+   reordenando ahí los dos <div> (el de la imagen y el del texto) dentro
+   de esa sección — el que va primero en el código queda a la izquierda. */
+
+.landing-bloque-tarjeta {
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
   gap: var(--sp-7);
-  max-width: 1080px;
-  margin: 0 auto;
-  padding: var(--sp-8) var(--sp-5);
+  padding: var(--sp-6);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  background: var(--surface);
+  /* sombra normal de tarjeta + un resplandor blanco muy suave detrás,
+     igual de tenue que el del logo del hero (nada "brillante"). */
+  box-shadow: var(--shadow-card), 0 0 50px -12px rgba(255, 255, 255, 0.14);
+  /* estado inicial: invisible y empujada fuera de la pantalla. "100vw" es
+     el ancho completo de la pantalla, así que garantiza que arranca
+     fuera de la vista sin importar el tamaño de la tarjeta. */
+  opacity: 0;
+  transform: translateX(-100vw);
+  transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 1.1s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease;
 }
 
-/* "alterno" no necesita voltear la dirección del texto (eso causaba que
-   los dos bloques de texto no quedaran alineados igual): como en su JSX
-   la imagen va primero y el texto después, en un grid normal (de
-   izquierda a derecha) ya caen solos en lados opuestos al primer bloque:
-   ahí la imagen queda a la izquierda y el texto a la derecha.
+/* la segunda sección ("alterno") entra del lado contrario a la primera:
+   arranca fuera de la pantalla a la DERECHA en vez de a la izquierda. */
+.landing-bloque-alterno .landing-bloque-tarjeta {
+  transform: translateX(100vw);
+}
 
-   ¿Quieres que en vez de imagen-texto quede texto-imagen (o al revés)
-   en alguna de las dos secciones? Eso NO se cambia aquí: se cambia en
-   Landing.jsx, reordenando ahí los dos <div> (el de la imagen y el del
-   texto) dentro de esa sección — el que va primero en el código queda
-   a la izquierda. */
+.landing-bloque.reveal-visible .landing-bloque-tarjeta {
+  opacity: 1;
+  transform: none;
+}
+
+.landing-bloque.reveal-visible .landing-bloque-tarjeta:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
 
 .landing-bloque-texto {
   display: flex;
   flex-direction: column;
-  /* Posición del título y el párrafo DENTRO de su columna (no decide si
-     la columna completa está a la izq. o der. de la pantalla — eso es
-     el orden en el JSX, ver la nota de arriba). Cambia estos dos valores
-     JUNTOS:
-       centrado (como está ahora) -> align-items: center;    text-align: center;
-       pegado a la izquierda      -> align-items: flex-start; text-align: left;
-       pegado a la derecha        -> align-items: flex-end;   text-align: right; */
-  align-items: center;
-  text-align: center;
+  /* Posición del título y el párrafo DENTRO de su columna. Cambia estos
+     dos valores JUNTOS:
+       pegado a la izquierda (como está ahora) -> align-items: flex-start; text-align: left;
+       centrado                                 -> align-items: center;    text-align: center;
+       pegado a la derecha                      -> align-items: flex-end;  text-align: right; */
+  align-items: flex-start;
+  text-align: left;
 }
 
 .landing-bloque-etiqueta {
@@ -400,20 +415,10 @@
 
 .landing-bloque-media {
   width: 100%;
-  max-width: 380px;
-  margin: 0 auto;
   aspect-ratio: 4 / 3;
-  border-radius: var(--r-lg);
-  border: 1px solid var(--line);
-  background: var(--surface);
+  border-radius: var(--r-md);
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ink-soft);
-  font-size: 14px;
-  transition: border-color 0.25s ease, opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  background: var(--paper);
 }
 
 .landing-bloque-media img {
@@ -429,13 +434,6 @@
 
 .landing-bloque-media-completa img {
   object-fit: contain;
-}
-
-.landing-bloque-media:hover {
-  border-color: var(--violet-strong);
-  transform: scale(1.015);
-  transition-duration: 0.25s;
-  transition-timing-function: ease;
 }
 
 /* ---------- TARJETAS ---------- */
@@ -470,14 +468,14 @@
   border-radius: var(--r-lg);
   border: 1px solid var(--line);
   background: var(--surface);
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-card), 0 0 50px -12px rgba(255, 255, 255, 0.14);
   transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .landing-tarjeta:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -20px rgba(24, 18, 31, 0.25);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5), 0 0 50px -12px rgba(255, 255, 255, 0.14);
   transition-duration: 0.2s;
   transition-timing-function: ease;
 }
@@ -539,49 +537,74 @@
 /* ---------- CTA FINAL ---------- */
 
 .landing-cta-final {
-  /* "¿Listo para tu botón SCILD?" — cambia a "left" o "right" para mover
-     este bloque final (título, texto y botón van todos juntos). */
-  text-align: center;
-  padding: var(--sp-8) var(--sp-5);
-  background: var(--violet-tint);
+  /* El contenido real va en ".landing-cta-final-tarjeta" (abajo); esto
+     solo centra esa tarjeta en la página. */
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 var(--sp-5) var(--sp-8);
 }
 
-.landing-cta-final h2 {
+.landing-cta-final-tarjeta {
+  /* "¿Listo para tu botón SCILD?" — cambia a "left" o "right" para mover
+     el contenido DENTRO de la tarjeta (título, texto y botón). */
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--sp-7) var(--sp-6);
+  border-radius: var(--r-lg);
+  border: 1px solid var(--line);
+  background: var(--violet-tint);
+  box-shadow: var(--shadow-card), 0 0 50px -12px rgba(255, 255, 255, 0.14);
+}
+
+.landing-cta-final-tarjeta h2 {
   margin-bottom: var(--sp-2);
 }
 
-.landing-cta-final p {
+.landing-cta-final-tarjeta p {
   color: var(--ink-soft);
   margin-bottom: var(--sp-5);
 }
 
-.landing-cta-final button {
+.landing-cta-final-tarjeta button {
   padding: 14px 32px;
   border: none;
   border-radius: var(--r-md);
-  background: var(--violet);
-  color: #fff;
+  background: #fff;
+  color: #141414;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.15s ease, transform 0.2s ease;
+  box-shadow: 0 12px 28px -14px rgba(0, 0, 0, 0.6);
+  transition: background 0.15s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.landing-cta-final button:hover {
-  background: var(--violet-strong);
+.landing-cta-final-tarjeta button:hover {
+  background: #e8e8e8;
   transform: translateY(-2px);
+  box-shadow: 0 16px 32px -14px rgba(0, 0, 0, 0.7);
 }
 
 /* ---------- FOOTER ---------- */
 
 .landing-footer {
   /* "© 2026 SCILD" del final de la página. Cambia a "left" o "right"
-     para moverlo. */
+     para moverlo (quita el "justify-content: center" de abajo). */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
   padding: var(--sp-5);
   text-align: center;
   color: var(--ink-soft);
   font-size: 13px;
   border-top: 1px solid var(--line);
+}
+
+.landing-footer-logo {
+  height: 20px;
+  width: auto;
+  opacity: 0.6;
 }
 
 /* ---------- PANEL DE PEDIDO (overlay dinámico) ---------- */
@@ -602,7 +625,7 @@
 .landing-overlay-fondo {
   position: absolute;
   inset: 0;
-  background: rgba(24, 18, 31, 0.45);
+  background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(2px);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -622,7 +645,7 @@
   overflow-y: auto;
   transform: translateX(100%);
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: -20px 0 50px -20px rgba(24, 18, 31, 0.35);
+  box-shadow: -20px 0 50px -20px rgba(0, 0, 0, 0.6);
 }
 
 .landing-overlay-abierto .landing-overlay-panel {
@@ -661,8 +684,8 @@
     padding: var(--sp-3) var(--sp-4);
   }
 
-  .landing-nav-marca {
-    font-size: 17px;
+  .landing-nav-marca-logo {
+    height: 38px;
   }
 
   .landing-nav-links {
@@ -684,38 +707,33 @@
   }
 
   .landing-bloque {
+    padding: var(--sp-7) var(--sp-4);
+  }
+
+  .landing-bloque-tarjeta {
     grid-template-columns: 1fr;
     gap: var(--sp-5);
-    padding: var(--sp-7) var(--sp-4);
+    padding: var(--sp-5);
+  }
+
+  .landing-bloque-texto {
+    align-items: center;
+    text-align: center;
   }
 
   .landing-bloque-texto p {
     max-width: none;
   }
 
-  .landing-bloque-media {
-    max-width: 260px;
-  }
-
-  /* en una sola columna, la entrada lateral se ve más comedida y no deja
-     nada fuera de la pantalla mientras aparece */
-  .reveal-izquierda {
-    transform: translateX(-20px);
-  }
-
-  .reveal-derecha {
-    transform: translateX(20px);
-  }
-
   .landing-tarjetas-lista {
     grid-template-columns: 1fr;
   }
 
-  .landing-cta-final {
-    padding: var(--sp-7) var(--sp-4);
+  .landing-cta-final-tarjeta {
+    padding: var(--sp-6) var(--sp-4);
   }
 
-  .landing-cta-final button {
+  .landing-cta-final-tarjeta button {
     width: 100%;
   }
 
@@ -736,9 +754,17 @@
     animation: none;
   }
 
-  .destello {
+  .landing-hero-logo {
     animation: none;
-    opacity: 0.4;
+  }
+
+  .landing-nav-marca-logo {
+    animation: none;
+  }
+
+  .landing-bloque-tarjeta {
+    transform: none !important;
+    transition: opacity 0.4s ease;
   }
 
   .landing-tarjeta.reveal-visible .landing-tarjeta-icono {

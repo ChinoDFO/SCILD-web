@@ -51,10 +51,26 @@
 }
 
 .marca {
-  font-family: var(--display);
-  font-size: 20px;
-  font-weight: 500;
-  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+}
+
+.marca-logo {
+  height: 40px;
+  width: auto;
+  display: block;
+  animation: marca-latido 2.4s ease-in-out infinite;
+}
+
+/* "late" (respira) muy sutil, sin ningún destello de color */
+@keyframes marca-latido {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
 }
 
 .barra-superior-nav {

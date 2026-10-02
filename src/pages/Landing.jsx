@@ -68,6 +68,10 @@ export default function Landing() {
     });
   }
 
+  function irArriba() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   // Progreso de lectura: qué tanto ha bajado la persona en la página,
   // para la barra fina de la barra superior.
   const alturaDesplazable =
@@ -82,7 +86,18 @@ export default function Landing() {
   return (
     <div className="landing">
       <header className={`landing-nav ${desplazamiento > 40 ? "landing-nav-desplazado" : ""}`}>
-        <span className="landing-nav-marca">{/* espacio: nombre corto / logo de marca */}SCILD</span>
+        <button
+          type="button"
+          className="landing-nav-marca"
+          onClick={irArriba}
+          aria-label="SCILD — volver arriba"
+        >
+          <img
+            src="/img-scild/logo-venado-blanco.png"
+            alt="SCILD"
+            className="landing-nav-marca-logo"
+          />
+        </button>
         <nav className="landing-nav-links">
           <MenuGestion onPedir={abrirPedido} />
         </nav>
@@ -107,32 +122,6 @@ export default function Landing() {
           className="landing-hero-capa landing-hero-capa-brillo"
           style={{ transform: `translate3d(0, ${desplazamiento * 0.18}px, 0)` }}
         />
-        <div className="landing-hero-destellos" aria-hidden="true">
-          {Array.from({ length: 18 }).map((_, indice) => {
-            // Posiciones y tiempos "al azar" pero fijos (no cambian en cada
-            // render): cada destello usa el índice para variar su lugar,
-            // tamaño y ritmo de parpadeo.
-            const izquierda = (indice * 53) % 100;
-            const arriba = (indice * 31) % 100;
-            const retraso = (indice % 6) * 0.6;
-            const duracion = 3 + (indice % 4);
-            const tamano = 2 + (indice % 3);
-            return (
-              <span
-                key={indice}
-                className="destello"
-                style={{
-                  left: `${izquierda}%`,
-                  top: `${arriba}%`,
-                  width: `${tamano}px`,
-                  height: `${tamano}px`,
-                  animationDelay: `${retraso}s`,
-                  animationDuration: `${duracion}s`,
-                }}
-              />
-            );
-          })}
-        </div>
 
         <div
           className="landing-hero-contenido"
@@ -141,10 +130,11 @@ export default function Landing() {
             opacity: Math.max(1 - desplazamiento / 420, 0),
           }}
         >
-          <div className="landing-hero-logo" aria-hidden="true">
-            <img src="/img-scild/logo_nf.png" alt="" className="landing-hero-logo" />
-            {/* espacio para el logo de la empresa */}
-          </div>
+          <img
+            src="/img-scild/logo-venado-scild-sin-fondo.png"
+            alt="SCILD"
+            className="landing-hero-logo"
+          />
           <p className="landing-hero-eslogan">
             {/* espacio para el eslogan o frase de marca */}
             Imaginamos el riesgo. Diseñamos la respuesta.
@@ -176,50 +166,57 @@ export default function Landing() {
       </section>
 
       {/* ---------- SECCIONES DE CONTENIDO (deslizantes al aparecer) ---------- */}
-      {/* "El problema": toda la sección entra deslizándose de izquierda a
-          derecha, como una ventana que se abre desde el borde izquierdo.
+      {/* "El problema": la tarjeta completa entra deslizándose desde fuera
+          de la pantalla (izquierda) hacia la derecha, hasta quedar
+          centrada. El "reveal" va en la <section> (no en la tarjeta): así
+          el navegador puede seguir detectando cuándo esta parte de la
+          página entra en pantalla, aunque la tarjeta en sí arranque
+          completamente fuera de la vista.
 
           El div que va PRIMERO aquí abajo (el texto) es el que queda del
-          lado IZQUIERDO de la pantalla, y el segundo (la imagen) del lado
+          lado IZQUIERDO de la tarjeta, y el segundo (la imagen) del lado
           DERECHO. Si los cambias de orden, cambian de lado.
           Para mover el texto/título DENTRO de su lado (centrado, pegado a
           la izq. o a la der.), eso se ajusta en Landing.css, en
           ".landing-bloque-texto" (align-items + text-align). */}
-      <section className="landing-bloque">
-        <div className="landing-bloque-texto reveal ">
-          <span className="landing-bloque-etiqueta"></span>
-          <h2>Los robos no avisan.</h2>
-          <p>
-            Cada día, negocios como el tuyo enfrentan robos sin tener forma de reaccionar a tiempo.
-             Llamar a la policía tarda. Avisar a los vecinos es imposible en el momento.
-             Pero solo necesitas presionar un boton, para poder imformar todos.
-          </p>
-        </div>
-        <div className="landing-bloque-media reveal">
-          <img src="/img-scild/robo.jpeg" alt="Negocio sufriendo un robo sin forma de pedir ayuda" />
+      <section className="landing-bloque reveal">
+        <div className="landing-bloque-tarjeta">
+          <div className="landing-bloque-texto">
+            <span className="landing-bloque-etiqueta"></span>
+            <h2>Los robos no avisan.</h2>
+            <p>
+              Cada día, negocios como el tuyo enfrentan robos sin tener forma de reaccionar a tiempo.
+               Llamar a la policía tarda. Avisar a los vecinos es imposible en el momento.
+               Pero solo necesitas presionar un boton, para poder imformar todos.
+            </p>
+          </div>
+          <div className="landing-bloque-media">
+            <img src="/img-scild/robo.jpeg" alt="Negocio sufriendo un robo sin forma de pedir ayuda" />
+          </div>
         </div>
       </section>
 
-      {/* "La explicación": entra de derecha a izquierda, en sentido
-          contrario a la sección anterior, para que la página se sienta
-          más dinámica al bajar.
-
-          Aquí la imagen va PRIMERO (queda a la izquierda) y el texto
-          SEGUNDO (queda a la derecha) — al revés que en la sección de
-          arriba. Si quieres que también el texto quede a la izquierda
-          en esta sección, solo cambia el orden de los dos <div> de aquí
-          abajo (pon primero el que dice "landing-bloque-texto"). */}
-      <section className="landing-bloque landing-bloque-alterno">
-        <div className="landing-bloque-media landing-bloque-media-completa reveal ">
-          <img src="/img-scild/alarma.jpeg" alt="Botón de pánico activando una alerta que llega a toda la comunidad de negocios" />
-        </div>
-        <div className="landing-bloque-texto reveal reveal">
-          <span className="landing-bloque-etiqueta"></span>
-          <h2>Un dispositivo pequeño con un impacto enorme.</h2>
-          <p>
-          El botón de pánico comunitario es un dispositivo compacto que se instala en cualquier negocio.
-          Para conectar toda la comunidad de negocios en tiempo real.
-          </p>
+      {/* "La explicación": el orden de imagen/texto se invierte respecto
+          a la sección anterior (abajo la imagen va PRIMERO y queda a la
+          izquierda, el texto SEGUNDO y queda a la derecha), para que la
+          página se sienta más dinámica al bajar — pero la entrada
+          (deslizar desde fuera de la pantalla) es la misma en las dos.
+          Si quieres que también el texto quede a la izquierda en esta
+          sección, solo cambia el orden de los dos <div> de aquí abajo
+          (pon primero el que dice "landing-bloque-texto"). */}
+      <section className="landing-bloque landing-bloque-alterno reveal">
+        <div className="landing-bloque-tarjeta">
+          <div className="landing-bloque-media landing-bloque-media-completa">
+            <img src="/img-scild/alarma.jpeg" alt="Botón de pánico activando una alerta que llega a toda la comunidad de negocios" />
+          </div>
+          <div className="landing-bloque-texto">
+            <span className="landing-bloque-etiqueta"></span>
+            <h2>Un dispositivo pequeño con un impacto enorme.</h2>
+            <p>
+            El botón de pánico comunitario es un dispositivo compacto que se instala en cualquier negocio.
+            Para conectar toda la comunidad de negocios en tiempo real.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -259,16 +256,24 @@ export default function Landing() {
       {/* ---------- LLAMADO A LA ACCIÓN FINAL ---------- */}
       {/* Para mover este bloque a la izquierda/derecha: Landing.css,
           ".landing-cta-final" (text-align). */}
-      <section className="landing-cta-final reveal">
-        <h2>¿Listo para tu botón SCILD?</h2>
-        <p>Una alerta a todo tu equipo, al instante.</p>
-        <button type="button" onClick={abrirPedido}>
-          Pedir tu botón ahora
-        </button>
+      <section className="landing-cta-final">
+        <div className="landing-cta-final-tarjeta reveal reveal-escala">
+          <h2>¿Listo para tu botón SCILD?</h2>
+          <p>Una alerta a todo tu equipo, al instante.</p>
+          <button type="button" onClick={abrirPedido}>
+            Pedir tu botón ahora
+          </button>
+        </div>
       </section>
 
       <footer className="landing-footer">
-        <span>{/* espacio para nota legal / redes */}© {new Date().getFullYear()} SCILD</span>
+        <img
+          src="/img-scild/logo-venado-blanco.png"
+          alt=""
+          aria-hidden="true"
+          className="landing-footer-logo"
+        />
+        <span>© {new Date().getFullYear()} SCILD</span>
       </footer>
 
       {/* ---------- PANEL DE PEDIDO (aparece sin cambiar de página) ---------- */}

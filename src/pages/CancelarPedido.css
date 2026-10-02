@@ -1,7 +1,17 @@
 .pagina-cancelar-wrap {
+  /* Misma paleta negra/gris que la portada (ver Landing.css): se
+     redefinen aquí las variables de marca, sin tocar el resto del sitio. */
+  --paper: #000000;
+  --surface: #141414;
+  --line: #292929;
+  --ink-soft: #a3a3a3;
+  --violet: #d4d4d4;
+  --violet-strong: #ffffff;
+  --violet-tint: #1a1a1a;
   min-height: 100svh;
   display: flex;
   flex-direction: column;
+  background: var(--paper);
 }
 
 .pagina-cancelar {
@@ -87,6 +97,7 @@
   border-radius: var(--r-md);
   padding: var(--sp-5);
   margin-top: var(--sp-4);
+  box-shadow: 0 0 50px -12px rgba(255, 255, 255, 0.14);
 }
 
 .aviso h1 {

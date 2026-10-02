@@ -46,7 +46,9 @@ export default function CancelarPedido() {
   return (
     <div className="pagina-cancelar-wrap">
       <header className="barra-superior">
-        <Link to="/" className="marca">SCILD</Link>
+        <Link to="/" className="marca" aria-label="SCILD — inicio">
+          <img src="/img-scild/logo-venado-blanco.png" alt="SCILD" className="marca-logo" />
+        </Link>
         <MenuGestion />
       </header>
 
