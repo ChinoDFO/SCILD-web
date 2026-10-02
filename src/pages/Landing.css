@@ -82,7 +82,7 @@
 }
 
 .landing-nav-marca-logo {
-  height: 48px;
+  height: 64px;
   width: auto;
   display: block;
   animation: landing-marca-latido 2.4s ease-in-out infinite;
@@ -192,8 +192,8 @@
      real del logo en vez de un rectángulo, sin que se vea brillante.
      Tamaño: se achica solo en pantallas angostas (celular) en vez de
      saltar a un tamaño fijo diminuto. ¿Más grande o más chico en
-     celular? Sube o baja el 60vw (por ejemplo 70vw para más grande). */
-  width: min(300px, 60vw);
+     celular? Sube o baja el 74vw (por ejemplo 82vw para más grande). */
+  width: min(380px, 74vw);
   aspect-ratio: 1 / 1;
   height: auto;
   filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.3))
@@ -353,7 +353,7 @@
   background: var(--surface);
   /* sombra normal de tarjeta + un resplandor blanco muy suave detrás,
      igual de tenue que el del logo del hero (nada "brillante"). */
-  box-shadow: var(--shadow-card), 0 0 50px -12px rgba(255, 255, 255, 0.14);
+  box-shadow: var(--shadow-card), 0 0 65px 4px rgba(255, 255, 255, 0.22);
   /* estado inicial: invisible y empujada fuera de la pantalla. "100vw" es
      el ancho completo de la pantalla, así que garantiza que arranca
      fuera de la vista sin importar el tamaño de la tarjeta. */
@@ -468,14 +468,14 @@
   border-radius: var(--r-lg);
   border: 1px solid var(--line);
   background: var(--surface);
-  box-shadow: var(--shadow-card), 0 0 50px -12px rgba(255, 255, 255, 0.14);
+  box-shadow: var(--shadow-card), 0 0 65px 4px rgba(255, 255, 255, 0.22);
   transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .landing-tarjeta:hover {
   transform: translateY(-4px);
-  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5), 0 0 50px -12px rgba(255, 255, 255, 0.14);
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5), 0 0 65px 4px rgba(255, 255, 255, 0.22);
   transition-duration: 0.2s;
   transition-timing-function: ease;
 }
@@ -554,7 +554,7 @@
   border-radius: var(--r-lg);
   border: 1px solid var(--line);
   background: var(--violet-tint);
-  box-shadow: var(--shadow-card), 0 0 50px -12px rgba(255, 255, 255, 0.14);
+  box-shadow: var(--shadow-card), 0 0 65px 4px rgba(255, 255, 255, 0.22);
 }
 
 .landing-cta-final-tarjeta h2 {
@@ -685,7 +685,7 @@
   }
 
   .landing-nav-marca-logo {
-    height: 38px;
+    height: 50px;
   }
 
   .landing-nav-links {
