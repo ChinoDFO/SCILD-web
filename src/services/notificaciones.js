@@ -1,40 +1,37 @@
-import emailjs from "@emailjs/browser";
-import { CORREO_ADMIN } from "../config/contacto";
-import { formatearFecha } from "../utils/fechas";
+// src/services/notificaciones.js
+//
+// Los correos ya no se mandan desde el navegador: aquí solo se le avisa al
+// backend (scild-backend) "este pedido pasó a tal estado" y él se encarga de
+// buscar el pedido, armar el correo y mandarlo desde Gmail. Por eso solo se
+// envía el código del pedido, nunca destinatario ni contenido.
 
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-const PLANTILLA_NUEVO_PEDIDO = import.meta.env.VITE_EMAILJS_PLANTILLA_NUEVO_PEDIDO;
-const PLANTILLA_CONFIRMADO = import.meta.env.VITE_EMAILJS_PLANTILLA_CONFIRMADO;
-const PLANTILLA_CANCELADO = import.meta.env.VITE_EMAILJS_PLANTILLA_CANCELADO;
+const API_URL = import.meta.env.VITE_API_URL;
+
+async function avisarAlBackend(pedidoId, tipo) {
+  if (!API_URL) {
+    throw new Error("Falta VITE_API_URL en el .env: no se puede avisar al backend");
+  }
+
+  const respuesta = await fetch(`${API_URL}/api/correos/pedido`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ pedidoId, tipo }),
+  });
+
+  if (!respuesta.ok) {
+    const { error } = await respuesta.json().catch(() => ({}));
+    throw new Error(error || `El backend respondió ${respuesta.status}`);
+  }
+}
 
 export function enviarCorreoNuevoPedidoAdmin(pedido) {
-  return emailjs.send(SERVICE_ID, PLANTILLA_NUEVO_PEDIDO, {
-    to_email: CORREO_ADMIN,
-    numero_pedido: pedido.numeroPedido,
-    nombre: pedido.nombre,
-    correo: pedido.correo,
-    telefono: pedido.telefono,
-    domicilio: pedido.domicilio,
-    indicaciones: pedido.indicaciones || "(sin indicaciones)",
-    version: pedido.versionNombre,
-    codigo_entrega: pedido.codigoEntrega,
-  });
+  return avisarAlBackend(pedido.id, "nuevo");
 }
 
-export function enviarCorreoPedidoConfirmado({ correo, nombre, numeroPedido, versionNombre, cancelableHasta }) {
-  return emailjs.send(SERVICE_ID, PLANTILLA_CONFIRMADO, {
-    to_email: correo,
-    nombre,
-    numero_pedido: numeroPedido,
-    version: versionNombre,
-    cancelable_hasta: formatearFecha(cancelableHasta),
-  });
+export function enviarCorreoPedidoConfirmado(pedidoId) {
+  return avisarAlBackend(pedidoId, "confirmado");
 }
 
-export function enviarCorreoPedidoCancelado({ correo, nombre, numeroPedido }) {
-  return emailjs.send(SERVICE_ID, PLANTILLA_CANCELADO, {
-    to_email: correo,
-    nombre,
-    numero_pedido: numeroPedido,
-  });
+export function enviarCorreoPedidoCancelado(pedidoId) {
+  return avisarAlBackend(pedidoId, "cancelado");
 }

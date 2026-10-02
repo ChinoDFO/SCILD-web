@@ -1,1 +1,0 @@
-export const CORREO_ADMIN = "scild2154@gmail.com";

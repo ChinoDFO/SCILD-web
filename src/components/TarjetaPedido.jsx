@@ -36,13 +36,7 @@ export default function TarjetaPedido({
     try {
       const fecha = new Date(fechaLimite);
       await alConfirmar(pedido.id, fecha);
-      enviarCorreoPedidoConfirmado({
-        correo: pedido.correo,
-        nombre: pedido.nombre,
-        numeroPedido: pedido.numeroPedido,
-        versionNombre: pedido.versionNombre,
-        cancelableHasta: fecha,
-      }).catch((err) =>
+      enviarCorreoPedidoConfirmado(pedido.id).catch((err) =>
         console.error("No se pudo avisar al cliente por correo:", err)
       );
     } finally {

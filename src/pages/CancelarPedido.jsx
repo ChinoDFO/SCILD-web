@@ -26,11 +26,7 @@ export default function CancelarPedido() {
     setEnviando(true);
     try {
       const resultado = await cancelarPedido(datos);
-      enviarCorreoPedidoCancelado({
-        correo: datos.correo,
-        nombre: datos.nombre,
-        numeroPedido: resultado.numeroPedido,
-      }).catch((err) =>
+      enviarCorreoPedidoCancelado(datos.codigo.trim()).catch((err) =>
         console.error("No se pudo enviar el correo de cancelación:", err)
       );
       setNumeroPedido(resultado.numeroPedido);

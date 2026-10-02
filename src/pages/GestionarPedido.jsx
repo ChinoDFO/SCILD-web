@@ -54,16 +54,12 @@ export default function GestionarPedido() {
     setError("");
     setCancelando(true);
     try {
-      const resultado = await cancelarPedido({
+      await cancelarPedido({
         codigo: pedido.id,
         nombre: datos.nombre,
         correo: datos.correo,
       });
-      enviarCorreoPedidoCancelado({
-        correo: datos.correo,
-        nombre: datos.nombre,
-        numeroPedido: resultado.numeroPedido,
-      }).catch((err) =>
+      enviarCorreoPedidoCancelado(pedido.id).catch((err) =>
         console.error("No se pudo enviar el correo de cancelación:", err)
       );
       setPedido((anterior) => ({
