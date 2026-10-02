@@ -101,7 +101,7 @@
   border: 1px solid var(--line);
   background: var(--surface);
   border-left: 3px solid var(--line);
-  box-shadow: 0 0 65px 4px rgba(255, 255, 255, 0.22);
+  box-shadow: 0 0 55px -4px rgba(255, 255, 255, 0.17);
 }
 
 .tarjeta-estado-etiqueta {
