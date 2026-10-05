@@ -1,0 +1,95 @@
+.pagina-instalar-wrap {
+  /* Misma paleta negra/gris que la portada (ver Landing.css). */
+  --paper: #000000;
+  --surface: #141414;
+  --line: #292929;
+  --ink-soft: #a3a3a3;
+  --violet: #d4d4d4;
+  --violet-strong: #ffffff;
+  --violet-tint: #1a1a1a;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+}
+
+.pagina-instalar {
+  flex: 1;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: var(--sp-7) var(--sp-5) var(--sp-8);
+}
+
+.pagina-instalar h1 {
+  margin-bottom: var(--sp-2);
+}
+
+.pagina-instalar .instrucciones {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 15px;
+  margin-bottom: var(--sp-7);
+}
+
+.paso-instalar {
+  padding: var(--sp-5) 0;
+  border-top: 1px solid var(--line);
+}
+
+.paso-instalar h2 {
+  margin-bottom: var(--sp-3);
+}
+
+.paso-instalar ol {
+  margin: 0;
+  padding-left: 1.3em;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  font-size: 15px;
+}
+
+.nota-paso {
+  margin-top: var(--sp-3);
+  font-size: 13.5px;
+  color: var(--ink-soft);
+}
+
+.cta-instalar {
+  margin-top: var(--sp-6);
+  padding: var(--sp-5);
+  border-radius: var(--r-md);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.cta-instalar p {
+  margin-bottom: var(--sp-4);
+  color: var(--ink-soft);
+  font-size: 15px;
+}
+
+.boton-instalar {
+  display: inline-block;
+  padding: 13px 28px;
+  border-radius: var(--r-sm);
+  background: #fff;
+  color: #141414 !important;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none !important;
+}
+
+.boton-instalar:hover {
+  background: #e8e8e8;
+  box-shadow: 0 8px 20px -8px rgba(0, 0, 0, 0.5);
+}
+
+.pagina-instalar .enlace-volver {
+  display: block;
+  margin-top: var(--sp-6);
+  font-size: 14px;
+  color: var(--ink-soft);
+}

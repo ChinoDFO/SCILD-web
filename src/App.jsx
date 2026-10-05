@@ -7,6 +7,7 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import CancelarPedido from "./pages/CancelarPedido";
 import GestionarPedido from "./pages/GestionarPedido";
+import InstalarApp from "./pages/InstalarApp";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           />
           <Route path="/cancelar" element={<CancelarPedido />} />
           <Route path="/gestionar" element={<GestionarPedido />} />
+          <Route path="/instalar-app" element={<InstalarApp />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>

@@ -78,6 +78,15 @@ export default function MenuGestion({ onPedir }) {
         <Link role="menuitem" to="/cancelar" onClick={() => setAbierto(false)}>
           Cancelar pedido
         </Link>
+        <Link
+          role="menuitem"
+          to="/instalar-app"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={() => setAbierto(false)}
+        >
+          Instalar la app
+        </Link>
       </div>
     </div>
   );
