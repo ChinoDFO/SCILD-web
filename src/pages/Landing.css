@@ -418,7 +418,10 @@
   aspect-ratio: 4 / 3;
   border-radius: var(--r-md);
   overflow: hidden;
-  background: var(--paper);
+  /* Mismo color que la tarjeta que lo rodea (no "--paper", que aquí es
+     negro puro): con imágenes PNG sin fondo, el recuadro no debe notarse,
+     solo la imagen flotando dentro de la tarjeta. */
+  background: var(--surface);
 }
 
 .landing-bloque-media img {
@@ -434,6 +437,13 @@
 
 .landing-bloque-media-completa img {
   object-fit: contain;
+}
+
+/* Solo para la pantalla de alertas: la imagen casi llena el recuadro
+   cuadrado de por sí, así que un respiro alrededor (sin agrandar el
+   recuadro) la hace sentir más chica sin que se pierda en la tarjeta. */
+.landing-bloque-media-aire {
+  padding: var(--sp-6);
 }
 
 /* ---------- TARJETAS ---------- */

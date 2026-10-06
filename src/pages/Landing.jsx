@@ -183,15 +183,16 @@ export default function Landing() {
         <div className="landing-bloque-tarjeta">
           <div className="landing-bloque-texto">
             <span className="landing-bloque-etiqueta"></span>
-            <h2>Los robos no avisan.</h2>
+            <h2>Las emergencias no avisan.</h2>
             <p>
-              Cada día, negocios como el tuyo enfrentan robos sin tener forma de reaccionar a tiempo.
-               Llamar a la policía tarda. Avisar a los vecinos es imposible en el momento.
-               Pero solo necesitas presionar un boton, para poder imformar todos.
+              Cada día, negocios como el tuyo enfrentan robos, incendios o emergencias médicas
+              sin tener forma de reaccionar a tiempo. Llamar a la policía tarda. Avisar a los
+              vecinos es imposible en el momento. Pero solo necesitas presionar un botón para
+              que todos se enteren al instante.
             </p>
           </div>
-          <div className="landing-bloque-media">
-            <img src="/img-scild/robo.jpeg" alt="Negocio sufriendo un robo sin forma de pedir ayuda" />
+          <div className="landing-bloque-media landing-bloque-media-completa landing-bloque-media-aire">
+            <img src="/img-scild/pantalla-de-alertas.png" alt="Pantalla del grupo mostrando una alerta de incendio activa y el historial de alertas atendidas" />
           </div>
         </div>
       </section>
@@ -207,7 +208,7 @@ export default function Landing() {
       <section className="landing-bloque landing-bloque-alterno reveal">
         <div className="landing-bloque-tarjeta">
           <div className="landing-bloque-media landing-bloque-media-completa">
-            <img src="/img-scild/alarma.jpeg" alt="Botón de pánico activando una alerta que llega a toda la comunidad de negocios" />
+            <img src="/img-scild/boton-panico-sin-fondo.png" alt="Botón de pánico físico que se instala en el negocio" />
           </div>
           <div className="landing-bloque-texto">
             <span className="landing-bloque-etiqueta"></span>
